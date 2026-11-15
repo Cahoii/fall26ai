@@ -1,0 +1,3782 @@
+[
+  {
+    "id": 1,
+    "section": "RNN, NLP & Attention",
+    "question": "\"He said, Teddy Roosevelt...\" vs \"He said, Teddy bears...\" illustrates which limitation of a unidirectional RNN?",
+    "options": {
+      "A": "It cannot handle long words",
+      "B": "It only uses information from earlier in the sequence",
+      "C": "It has too many parameters",
+      "D": "It cannot output probabilities"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235444.png",
+    "correctText": "It only uses information from earlier in the sequence",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 2,
+    "section": "RNN, NLP & Attention",
+    "question": "Why is it called \"backpropagation through time\"?",
+    "options": {
+      "A": "The backward pass runs from right to left, backwards in time",
+      "B": "Training takes a long time",
+      "C": "It uses timestamps as inputs",
+      "D": "It only updates the last time step"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235452.png",
+    "correctText": "The backward pass runs from right to left, backwards in time",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 3,
+    "section": "RNN, NLP & Attention",
+    "question": "Which RNN architecture fits sentiment classification?",
+    "options": {
+      "A": "One-to-many",
+      "B": "Many-to-many with Tx = Ty",
+      "C": "Many-to-one",
+      "D": "One-to-one"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235457.png",
+    "correctText": "Many-to-one",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 4,
+    "section": "RNN, NLP & Attention",
+    "question": "Which RNN architecture fits music generation?",
+    "options": {
+      "A": "Many-to-one",
+      "B": "One-to-many",
+      "C": "Many-to-many with Tx = Ty",
+      "D": "One-to-one"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235501.png",
+    "correctText": "One-to-many",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 5,
+    "section": "RNN, NLP & Attention",
+    "question": "Which RNN architecture fits named entity recognition?",
+    "options": {
+      "A": "One-to-many",
+      "B": "Many-to-one",
+      "C": "Many-to-many with Tx # Ty",
+      "D": "Many-to-many with Tx = Ty"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235504.png",
+    "correctText": "Many-to-many with Tx = Ty",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 6,
+    "section": "RNN, NLP & Attention",
+    "question": "Which RNN architecture fits machine translation?",
+    "options": {
+      "A": "One-to-one",
+      "B": "Many-to-one",
+      "C": "Many-to-many with Tx # Ty (encoder—decoder)",
+      "D": "One-to-many"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235508.png",
+    "correctText": "Many-to-many with Tx # Ty (encoder—decoder)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 7,
+    "section": "RNN, NLP & Attention",
+    "question": "What does a language model estimate?",
+    "options": {
+      "A": "The probability of a sentence, P(y(1), ..., y(Ty))",
+      "B": "The sentiment of a sentence",
+      "C": "The translation of a sentence",
+      "D": "The number of words in a sentence"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235512.png",
+    "correctText": "The probability of a sentence, P(y(1), ..., y(Ty))",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 8,
+    "section": "RNN, NLP & Attention",
+    "question": "What is the (EOS) token used for?",
+    "options": {
+      "A": "Marking unknown words",
+      "B": "Separating words",
+      "C": "Marking the start of a sentence",
+      "D": "Marking the end of a sentence"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235517.png",
+    "correctText": "Marking the end of a sentence",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 9,
+    "section": "RNN, NLP & Attention",
+    "question": "When training an RNN language model, what is the input x(t) at step t?",
+    "options": {
+      "A": "A random word",
+      "B": "The correct previous word y(t-1)",
+      "C": "The next word y(t+1)",
+      "D": "Always a zero vector"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235522.png",
+    "correctText": "The correct previous word y(t-1)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 10,
+    "section": "RNN, NLP & Attention",
+    "question": "How are novel sequences sampled from a trained language model?",
+    "options": {
+      "A": "Sample a word from the softmax distribution y(t) (np.random.choice) and feed it as the next input",
+      "B": "Always take the least likely word",
+      "C": "Copy sentences from the training set",
+      "D": "Run beam search with B = 1000"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235526.png",
+    "correctText": "Sample a word from the softmax distribution y(t) (np.random.choice) and feed it as the next input",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 11,
+    "section": "RNN, NLP & Attention",
+    "question": "What is an advantage of a character-level language model?",
+    "options": {
+      "A": "It captures long-range dependencies better",
+      "B": "It is cheaper to train",
+      "C": "It never needs an (UNK) token",
+      "D": "It uses shorter sequences"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235531.png",
+    "correctText": "It never needs an (UNK) token",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 12,
+    "section": "RNN, NLP & Attention",
+    "question": "What is a disadvantage of a character-level language model?",
+    "options": {
+      "A": "It cannot generate punctuation",
+      "B": "It needs a vocabulary of 1 million words",
+      "C": "It cannot be sampled",
+      "D": "Sequences are much longer, long-range dependencies are harder and it costs more to train"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235535.png",
+    "correctText": "Sequences are much longer, long-range dependencies are harder and it costs more to train",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 13,
+    "section": "RNN, NLP & Attention",
+    "question": "How are exploding gradients in RNNs usually handled?",
+    "options": {
+      "A": "With dropout",
+      "B": "With gradient clipping (rescaling gradients above a threshold)",
+      "C": "With a larger vocabulary",
+      "D": "With max pooling"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235539.png",
+    "correctText": "With gradient clipping (rescaling gradients above a threshold)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 14,
+    "section": "RNN, NLP & Attention",
+    "question": "\"The cat, which already ate ..., was full.\" Remembering \"cat\" until \"was\" is hard for a basic RNN mainly because of what?",
+    "options": {
+      "A": "Exploding gradients",
+      "B": "Too large a vocabulary",
+      "C": "Vanishing gradients",
+      "D": "Too few hidden units"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235543.png",
+    "correctText": "Vanishing gradients",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 15,
+    "section": "RNN, NLP & Attention",
+    "question": "In a GRU, how are the memory cell c(t) and the activation a(t) related?",
+    "options": {
+      "A": "c(t) = a(t)",
+      "B": "c(t) = 1 - a(t)",
+      "C": "They are unrelated",
+      "D": "c(t) = 2a(t)"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235546.png",
+    "correctText": "c(t) = a(t)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 16,
+    "section": "RNN, NLP & Attention",
+    "question": "In a GRU, what happens when the update gate Γ_u ≈ 0?",
+    "options": {
+      "A": "The memory cell is reset to zero",
+      "B": "The output becomes random",
+      "C": "The cell takes the new candidate value",
+      "D": "c(t−1) is kept unchanged, which helps avoid vanishing gradients"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235635.png",
+    "correctText": "c(t−1) is kept unchanged, which helps avoid vanishing gradients",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 17,
+    "section": "RNN, NLP & Attention",
+    "question": "What does the relevance gate Γ_r in a GRU control?",
+    "options": {
+      "A": "The size of the vocabulary",
+      "B": "How relevant c(t−1) is to computing the candidate c̃(t)",
+      "C": "The learning rate",
+      "D": "The output softmax"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235639.png",
+    "correctText": "How relevant c(t−1) is to computing the candidate c̃(t)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 18,
+    "section": "RNN, NLP & Attention",
+    "question": "Which three gates does an LSTM have?",
+    "options": {
+      "A": "Update (input), forget and output",
+      "B": "Update and relevance only",
+      "C": "Reset, attention and output",
+      "D": "Query, key and value"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235643.png",
+    "correctText": "Update (input), forget and output",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 19,
+    "section": "RNN, NLP & Attention",
+    "question": "How do GRU and LSTM compare?",
+    "options": {
+      "A": "GRU has three gates, LSTM has two",
+      "B": "LSTM is always faster than GRU",
+      "C": "GRU is simpler and faster; LSTM is more powerful and has long been the default first choice",
+      "D": "They are identical"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235700.png",
+    "correctText": "GRU is simpler and faster; LSTM is more powerful and has long been the default first choice",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 20,
+    "section": "RNN, NLP & Attention",
+    "question": "What is the main disadvantage of a bidirectional RNN?",
+    "options": {
+      "A": "It cannot use LSTM units",
+      "B": "It needs the entire sequence before predicting, so it does not suit real-time speech recognition",
+      "C": "It only reads the future",
+      "D": "It cannot be used for NER"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235706.png",
+    "correctText": "It needs the entire sequence before predicting, so it does not suit real-time speech recognition",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 21,
+    "section": "RNN, NLP & Attention",
+    "question": "What was the main motivation for Transformers over RNN/GRU/LSTM?",
+    "options": {
+      "A": "To use fewer attention layers",
+      "B": "To remove embeddings",
+      "C": "To process one word at a time more carefully",
+      "D": "To process the whole sequence in parallel instead of sequentially"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235710.png",
+    "correctText": "To process the whole sequence in parallel instead of sequentially",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 22,
+    "section": "RNN, NLP & Attention",
+    "question": "What is the main weakness of one-hot word vectors?",
+    "options": {
+      "A": "They are too short",
+      "B": "They use too little memory",
+      "C": "All vectors are orthogonal, so the model cannot generalize between related words",
+      "D": "They cannot be used in RNNs"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235713.png",
+    "correctText": "All vectors are orthogonal, so the model cannot generalize between related words",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 23,
+    "section": "RNN, NLP & Attention",
+    "question": "In the course examples, how many dimensions does a typical word embedding have?",
+    "options": {
+      "A": "300",
+      "B": "10,000",
+      "C": "2",
+      "D": "1"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235717.png",
+    "correctText": "300",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 24,
+    "section": "RNN, NLP & Attention",
+    "question": "In self-attention, how is the representation A(t) computed?",
+    "options": {
+      "A": "By averaging all word embeddings equally",
+      "B": "By taking only the embedding of word t",
+      "C": "By running an LSTM over the sentence",
+      "D": "By a softmax over q(t) - k(i) for all words, used to weight and sum the values vi)"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235721.png",
+    "correctText": "By a softmax over q(t) - k(i) for all words, used to weight and sum the values vi)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 25,
+    "section": "RNN, NLP & Attention",
+    "question": "What are the steps of transfer learning with word embeddings?",
+    "options": {
+      "A": "Train embeddings only on the small task",
+      "B": "Learn embeddings on a large corpus (or download them), transfer to the small task, optionally fine-tune if there is enough data",
+      "C": "Use one-hot vectors, then fine-tune",
+      "D": "Train on the small task, then transfer to the large corpus"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235725.png",
+    "correctText": "Learn embeddings on a large corpus (or download them), transfer to the small task, optionally fine-tune if there is enough data",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 26,
+    "section": "RNN, NLP & Attention",
+    "question": "For which tasks are pre-trained word embeddings less useful?",
+    "options": {
+      "A": "Language modeling and machine translation when lots of task data already exists",
+      "B": "Named entity recognition",
+      "C": "Text summarization",
+      "D": "Co-reference resolution"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235729.png",
+    "correctText": "Language modeling and machine translation when lots of task data already exists",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 27,
+    "section": "RNN, NLP & Attention",
+    "question": "How is the analogy \"man is to woman as king is to ?\" solved?",
+    "options": {
+      "A": "Find w that minimizes sim(e_w, e_man)",
+      "B": "Pick the most frequent word",
+      "C": "Find w maximizing sim(e_w, e_king - e_man + e_woman), giving \"queen\"",
+      "D": "Use t-SNE coordinates directly"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235733.png",
+    "correctText": "Find w maximizing sim(e_w, e_king - e_man + e_woman), giving \"queen\"",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 28,
+    "section": "RNN, NLP & Attention",
+    "question": "What is the cosine similarity of two vectors pointing in the same direction?",
+    "options": {
+      "A": "0",
+      "B": "-1",
+      "C": "0.5",
+      "D": "1"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235737.png",
+    "correctText": "1",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 29,
+    "section": "RNN, NLP & Attention",
+    "question": "With embedding matrix E (300 × 10,000) and one-hot vector O_j, what is E · O_j?",
+    "options": {
+      "A": "A 10,000x1 vector",
+      "B": "The embedding e_j (300×1) of word j",
+      "C": "The whole matrix E",
+      "D": "A scalar"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235742.png",
+    "correctText": "The embedding e_j (300×1) of word j",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 30,
+    "section": "RNN, NLP & Attention",
+    "question": "How is the embedding of a word obtained in practice?",
+    "options": {
+      "A": "By full matrix multiplication E - O;",
+      "B": "By training a new network",
+      "C": "By looking up the column directly (e.g., a Keras Embedding layer)",
+      "D": "By averaging all columns"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235747.png",
+    "correctText": "By looking up the column directly (e.g., a Keras Embedding layer)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 31,
+    "section": "RNN, NLP & Attention",
+    "question": "In Bengio's neural language model with a window of 4 previous words and 300-d embeddings, what is the size of the concatenated input?",
+    "options": {
+      "A": "1200",
+      "B": "300",
+      "C": "4",
+      "D": "10,000"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235750.png",
+    "correctText": "1200",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 32,
+    "section": "RNN, NLP & Attention",
+    "question": "What does the skip-gram model do?",
+    "options": {
+      "A": "Predicts the middle word from its neighbors",
+      "B": "Counts word co-occurrences",
+      "C": "Translates sentences",
+      "D": "Picks a context word and predicts a target word within a window around it"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235848.png",
+    "correctText": "Picks a context word and predicts a target word within a window around it",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 33,
+    "section": "RNN, NLP & Attention",
+    "question": "What is the main computational problem of the skip-gram softmax?",
+    "options": {
+      "A": "It has no parameters",
+      "B": "Its denominator sums over the whole vocabulary, which is very slow",
+      "C": "It cannot be trained",
+      "D": "It needs labeled data"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235851.png",
+    "correctText": "Its denominator sums over the whole vocabulary, which is very slow",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 34,
+    "section": "RNN, NLP & Attention",
+    "question": "Why is the dot product divided by √d_k in scaled dot-product attention?",
+    "options": {
+      "A": "To keep dot products from becoming too large, avoiding a saturated softmax and exploding gradients",
+      "B": "To increase the number of heads",
+      "C": "To normalize the vocabulary",
+      "D": "To make attention sequential"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235856.png",
+    "correctText": "To keep dot products from becoming too large, avoiding a saturated softmax and exploding gradients",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 35,
+    "section": "RNN, NLP & Attention",
+    "question": "What does CBOW (continuous bag-of-words) do?",
+    "options": {
+      "A": "Predicts a context word from the target",
+      "B": "Classifies word pairs as real or fake",
+      "C": "Uses surrounding words to predict the middle word",
+      "D": "Builds a co-occurrence matrix"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235900.png",
+    "correctText": "Uses surrounding words to predict the middle word",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 36,
+    "section": "RNN, NLP & Attention",
+    "question": "What values of k are suggested for negative sampling?",
+    "options": {
+      "A": "k = 100-200 for every dataset",
+      "B": "k = 5-20 for small datasets, 2—5 for large datasets",
+      "C": "k = 1 always",
+      "D": "k equal to the vocabulary size"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235905.png",
+    "correctText": "k = 5-20 for small datasets, 2—5 for large datasets",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 37,
+    "section": "RNN, NLP & Attention",
+    "question": "Why is negative sampling cheaper than the full softmax?",
+    "options": {
+      "A": "It removes the embedding matrix",
+      "B": "It uses no labels",
+      "C": "It only trains on positive pairs",
+      "D": "Each iteration only updates k + 1 binary classifiers instead of a 10,000-way softmax"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235909.png",
+    "correctText": "Each iteration only updates k + 1 binary classifiers instead of a 10,000-way softmax",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 38,
+    "section": "RNN, NLP & Attention",
+    "question": "What is multi-head attention?",
+    "options": {
+      "A": "One attention head applied many times with the same weights",
+      "B": "Attention over several sentences",
+      "C": "Several self-attention heads, each with its own Wi*Q, Wi'K, Wi*V, asking different questions in parallel",
+      "D": "A recurrent attention unit"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235912.png",
+    "correctText": "Several self-attention heads, each with its own Wi*Q, Wi'K, Wi*V, asking different questions in parallel",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 39,
+    "section": "RNN, NLP & Attention",
+    "question": "In GloVe, what does X_ij represent?",
+    "options": {
+      "A": "The number of times word i appears in the context of word j",
+      "B": "The cosine similarity of words i and j",
+      "C": "The embedding of word i",
+      "D": "The probability of word j"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235917.png",
+    "correctText": "The number of times word i appears in the context of word j",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 40,
+    "section": "RNN, NLP & Attention",
+    "question": "How does the Transformer give the model information about word order?",
+    "options": {
+      "A": "With recurrent connections",
+      "B": "With max pooling",
+      "C": "By sorting the words",
+      "D": "By adding positional encodings built from sine and cosine functions to the embeddings"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235921.png",
+    "correctText": "By adding positional encodings built from sine and cosine functions to the embeddings",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 41,
+    "section": "RNN, NLP & Attention",
+    "question": "In GloVe, how is the final embedding of word w obtained?",
+    "options": {
+      "A": "e_w only",
+      "B": "The average (e_w + θ_w) / 2",
+      "C": "θ_w only",
+      "D": "e_w × θ_w"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235926.png",
+    "correctText": "The average (e_w + θ_w) / 2",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 42,
+    "section": "RNN, NLP & Attention",
+    "question": "Why does the simple averaging model fail on \"Completely lacking in good taste, good service, and good ambience\"?",
+    "options": {
+      "A": "It ignores word order, so the many \"good\" words make it look positive",
+      "B": "It cannot handle long sentences",
+      "C": "It has no embeddings",
+      "D": "It only works for 5-star reviews"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235930.png",
+    "correctText": "It ignores word order, so the many \"good\" words make it look positive",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 43,
+    "section": "RNN, NLP & Attention",
+    "question": "What is the order of steps for debiasing word embeddings (Bolukbasi et al., 2016)?",
+    "options": {
+      "A": "Equalize — neutralize — identify",
+      "B": "Neutralize — identify — equalize",
+      "C": "Identify the bias direction — neutralize — equalize pairs",
+      "D": "Retrain all embeddings from scratch"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235933.png",
+    "correctText": "Identify the bias direction — neutralize — equalize pairs",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 44,
+    "section": "RNN, NLP & Attention",
+    "question": "Which words are neutralized during debiasing?",
+    "options": {
+      "A": "Grandmother and grandfather",
+      "B": "He and she",
+      "C": "All words in the vocabulary",
+      "D": "Words that are not definitional for gender, such as doctor and babysitter"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235938.png",
+    "correctText": "Words that are not definitional for gender, such as doctor and babysitter",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 45,
+    "section": "RNN, NLP & Attention",
+    "question": "Why is machine translation called a conditional language model?",
+    "options": {
+      "A": "It only works on conditional sentences",
+      "B": "The decoder estimates P(y(1), ..., y(Ty) given x), starting from the encoder output instead of a zero vector",
+      "C": "It uses an if-statement",
+      "D": "It samples randomly"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235942.png",
+    "correctText": "The decoder estimates P(y(1), ..., y(Ty) given x), starting from the encoder output instead of a zero vector",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 46,
+    "section": "RNN, NLP & Attention",
+    "question": "Why is greedy search a poor choice for translation?",
+    "options": {
+      "A": "It is too slow",
+      "B": "It needs a large beam width",
+      "C": "Choosing the best word at each step (e.g., \"going\" after \"Jane is\") can lead to a worse overall sentence",
+      "D": "It cannot produce (EOS)"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235947.png",
+    "correctText": "Choosing the best word at each step (e.g., \"going\" after \"Jane is\") can lead to a worse overall sentence",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 47,
+    "section": "RNN, NLP & Attention",
+    "question": "What does beam search become when B = 1?",
+    "options": {
+      "A": "Greedy search",
+      "B": "Exhaustive search",
+      "C": "Random sampling",
+      "D": "Breadth-first search"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-07 235951.png",
+    "correctText": "Greedy search",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 48,
+    "section": "RNN, NLP & Attention",
+    "question": "Why is masked multi-head attention used in the Transformer decoder during training?",
+    "options": {
+      "A": "To hide the source sentence",
+      "B": "To reduce the number of heads",
+      "C": "To add noise like dropout",
+      "D": "To hide later target words so the model cannot peek ahead while predicting left to right"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000025.png",
+    "correctText": "To hide later target words so the model cannot peek ahead while predicting left to right",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 49,
+    "section": "RNN, NLP & Attention",
+    "question": "What does length normalization in beam search do?",
+    "options": {
+      "A": "Maximizes the product of probabilities directly",
+      "B": "Sums log probabilities and divides by Ty*a (a = 0.7) to reduce the bias toward short sentences",
+      "C": "Removes the (EOS) token",
+      "D": "Fixes all sentences to 30 words"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000028.png",
+    "correctText": "Sums log probabilities and divides by Ty*a (a = 0.7) to reduce the bias toward short sentences",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 50,
+    "section": "RNN, NLP & Attention",
+    "question": "In beam search error analysis, P(y* given x) > P(y given x). Which component is at fault?",
+    "options": {
+      "A": "Beam search, so increase B",
+      "B": "The RNN model",
+      "C": "The BLEU score",
+      "D": "The training data labels"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000032.png",
+    "correctText": "Beam search, so increase B",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 51,
+    "section": "RNN, NLP & Attention",
+    "question": "For the output \"the the the the the the the.\" with references \"The cat is on the mat.\" / \"There is a cat on the mat.\", what is the modified unigram precision?",
+    "options": {
+      "A": "7/7",
+      "B": "1/7",
+      "C": "2/7",
+      "D": "0"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000036.png",
+    "correctText": "2/7",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 52,
+    "section": "RNN, NLP & Attention",
+    "question": "What is the purpose of the brevity penalty in BLEU?",
+    "options": {
+      "A": "To reward very short outputs",
+      "B": "To penalize translations that are too short",
+      "C": "To penalize repeated words",
+      "D": "To weight bigrams more than unigrams"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000040.png",
+    "correctText": "To penalize translations that are too short",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 53,
+    "section": "RNN, NLP & Attention",
+    "question": "In the attention model, what does α(t, t′) represent?",
+    "options": {
+      "A": "The probability of word t in the vocabulary",
+      "B": "The learning rate at step t",
+      "C": "The length of the output",
+      "D": "How much attention output step t pays to input word t′"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000208.png",
+    "correctText": "How much attention output step t pays to input word t′",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 54,
+    "section": "RNN, NLP & Attention",
+    "question": "What is a drawback of the attention model for translation?",
+    "options": {
+      "A": "It cannot handle long sentences",
+      "B": "It needs no training",
+      "C": "Its cost is quadratic, O(Tx x Ty)",
+      "D": "It only works with CNNs"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000211.png",
+    "correctText": "Its cost is quadratic, O(Tx x Ty)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 55,
+    "section": "RNN, NLP & Attention",
+    "question": "What does \"Add & Norm\" in a Transformer block do?",
+    "options": {
+      "A": "A residual connection followed by layer normalization",
+      "B": "Adds a new head and normalizes the vocabulary",
+      "C": "Adds positional encoding only",
+      "D": "Normalizes the learning rate el"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000216.png",
+    "correctText": "A residual connection followed by layer normalization",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 56,
+    "section": "RNN, NLP & Attention",
+    "question": "How are target labels set in trigger word detection?",
+    "options": {
+      "A": "1 for every time step",
+      "B": "1 only at the start of the audio",
+      "C": "1 while the trigger word is being spoken",
+      "D": "0 before and during the trigger word, then 1 (for several steps) right after it is said"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000220.png",
+    "correctText": "0 before and during the trigger word, then 1 (for several steps) right after it is said",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 57,
+    "section": "RNN, NLP & Attention",
+    "question": "Why is random search preferred over grid search for hyperparameters?",
+    "options": {
+      "A": "It always finds the global optimum",
+      "B": "You don't know in advance which hyperparameter matters, and random points try more distinct values of each",
+      "C": "It needs fewer GPUs",
+      "D": "Grid search cannot use the dev set"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000226.png",
+    "correctText": "You don't know in advance which hyperparameter matters, and random points try more distinct values of each",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 58,
+    "section": "RNN, NLP & Attention",
+    "question": "How should the learning rate α be sampled in [0.0001, 1]?",
+    "options": {
+      "A": "Uniformly between 0.0001 and 1",
+      "B": "Only at 0.0001 and 1",
+      "C": "On a grid of 5 values",
+      "D": "On a log scale: r = −4 × np.random.rand(), α = 10^r"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000229.png",
+    "correctText": "On a log scale: r = −4 × np.random.rand(), α = 10^r",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 59,
+    "section": "RNN, NLP & Attention",
+    "question": "How should β for an exponentially weighted average be sampled in [0.9, 0.999]?",
+    "options": {
+      "A": "Sample 1 − β on a log scale in [0.001, 0.1]",
+      "B": "Sample B uniformly",
+      "C": "Always use 0.95",
+      "D": "Sample B on a linear grid of 3 points"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000233.png",
+    "correctText": "Sample 1 − β on a log scale in [0.001, 0.1]",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 60,
+    "section": "RNN, NLP & Attention",
+    "question": "What is the \"Panda\" approach to hyperparameter tuning?",
+    "options": {
+      "A": "Training many models in parallel",
+      "B": "Using only default hyperparameters",
+      "C": "Babysitting one model and adjusting it daily when compute is limited",
+      "D": "Copying hyperparameters from another field"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000236.png",
+    "correctText": "Babysitting one model and adjusting it daily when compute is limited",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 61,
+    "section": "RNN, NLP & Attention",
+    "question": "What does Batch Normalization normalize?",
+    "options": {
+      "A": "Only the input features",
+      "B": "The intermediate values z",
+      "C": "The weights W",
+      "D": "The output labels"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000240.png",
+    "correctText": "The intermediate values z",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 62,
+    "section": "RNN, NLP & Attention",
+    "question": "What is the role of y and B in Batch Norm?",
+    "options": {
+      "A": "They are fixed constants equal to 1 and 0",
+      "B": "They are momentum hyperparameters",
+      "C": "They are the learning rate and decay rate",
+      "D": "They are learnable parameters that let the network choose the mean and variance of z"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000245.png",
+    "correctText": "They are learnable parameters that let the network choose the mean and variance of z",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 63,
+    "section": "RNN, NLP & Attention",
+    "question": "Why does Batch Norm have a slight regularization effect?",
+    "options": {
+      "A": "Mean and variance are computed per mini-batch, adding noise to z",
+      "B": "It removes half the units",
+      "C": "It adds an L2 penalty to the cost",
+      "D": "It reduces the learning rate"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000249.png",
+    "correctText": "Mean and variance are computed per mini-batch, adding noise to z",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 64,
+    "section": "RNN, NLP & Attention",
+    "question": "How are μ and σ² obtained for Batch Norm at test time?",
+    "options": {
+      "A": "From the single test example",
+      "B": "They are set to 0 and 1",
+      "C": "Estimated with an exponentially weighted average over training mini-batches",
+      "D": "Recomputed from the whole test set"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000255.png",
+    "correctText": "Estimated with an exponentially weighted average over training mini-batches",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 65,
+    "section": "RNN, NLP & Attention",
+    "question": "With z^(L) = [5, 2, −1, 3], what is the softmax probability of the first class?",
+    "options": {
+      "A": "0.042",
+      "B": "0.114",
+      "C": "0.25",
+      "D": "0.842"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000259.png",
+    "correctText": "0.842",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 66,
+    "section": "RNN, NLP & Attention",
+    "question": "What is the softmax loss for one example?",
+    "options": {
+      "A": "(¥ - yf",
+      "B": "-2; yj log yj",
+      "C": "max(0, 1 - yy)",
+      "D": "-log(1 - y)"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000303.png",
+    "correctText": "-2; yj log yj",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 67,
+    "section": "RNN, NLP & Attention",
+    "question": "What does orthogonalization mean in ML strategy?",
+    "options": {
+      "A": "Each tuning knob should affect only one aspect of performance",
+      "B": "All weights must be orthogonal",
+      "C": "Train and dev sets must be orthogonal",
+      "D": "Use one knob to fix every problem"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000307.png",
+    "correctText": "Each tuning knob should affect only one aspect of performance",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 68,
+    "section": "RNN, NLP & Attention",
+    "question": "The model does well on the dev set but poorly on the test set. What should you try?",
+    "options": {
+      "A": "A bigger network",
+      "B": "A better optimizer",
+      "C": "A bigger dev set, since you have overfit the dev set",
+      "D": "Change the cost function"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000311.png",
+    "correctText": "A bigger dev set, since you have overfit the dev set",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 69,
+    "section": "RNN, NLP & Attention",
+    "question": "10 images: classifier says 4 are cats, 3 of them correctly. What is the precision?",
+    "options": {
+      "A": "3/5",
+      "B": "3/4",
+      "C": "7/10",
+      "D": "4/10"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000314.png",
+    "correctText": "3/4",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 70,
+    "section": "RNN, NLP & Attention",
+    "question": "What is the F1 score?",
+    "options": {
+      "A": "The arithmetic mean of precision and recall",
+      "B": "Precision x recall",
+      "C": "The maximum of precision and recall",
+      "D": "The harmonic mean of precision and recall"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000319.png",
+    "correctText": "The harmonic mean of precision and recall",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 71,
+    "section": "RNN, NLP & Attention",
+    "question": "Classifiers: A (90%, 80 ms), B (92%, 95 ms), C (95%, 1500 ms). With “maximize accuracy subject to running time ≤ 100 ms”, which is chosen?",
+    "options": {
+      "A": "B",
+      "B": "A",
+      "C": "C",
+      "D": "None of them"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000323.png",
+    "correctText": "B",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 72,
+    "section": "RNN, NLP & Attention",
+    "question": "How is avoidable bias defined?",
+    "options": {
+      "A": "Dev error - training error",
+      "B": "Training error - human-level error",
+      "C": "Test error — dev error",
+      "D": "Human-level error - Bayes error"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000327.png",
+    "correctText": "Training error - human-level error",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 73,
+    "section": "RNN, NLP & Attention",
+    "question": "Human error 7.5%, training error 8%, dev error 10%. Where should you focus?",
+    "options": {
+      "A": "Reducing bias",
+      "B": "Changing the metric",
+      "C": "Reducing variance",
+      "D": "Nothing, the model is optimal"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000330.png",
+    "correctText": "Reducing variance",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 74,
+    "section": "RNN, NLP & Attention",
+    "question": "In the medical imaging example (typical human 3%, doctor 1%, experienced doctor 0.7%, team of experts 0.5%), which value is used as the proxy for Bayes error?",
+    "options": {
+      "A": "3%",
+      "B": "1%",
+      "C": "0.7%",
+      "D": "0.5%"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000333.png",
+    "correctText": "0.5%",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 75,
+    "section": "RNN, NLP & Attention",
+    "question": "In which kind of problem has ML clearly surpassed human-level performance?",
+    "options": {
+      "A": "Structured-data problems with lots of data, such as online advertising and loan approvals",
+      "B": "All natural perception tasks",
+      "C": "Problems with very little data",
+      "D": "Tasks with no labels"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000337.png",
+    "correctText": "Structured-data problems with lots of data, such as online advertising and loan approvals",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 76,
+    "section": "RNN, NLP & Attention",
+    "question": "In error analysis of 100 misclassified dev examples, only 5% are dogs. With a 10% dev error, what is the best case after fixing dogs?",
+    "options": {
+      "A": "5%",
+      "B": "0%",
+      "C": "9.5%",
+      "D": "9%"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000459.png",
+    "correctText": "9.5%",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 77,
+    "section": "RNN, NLP & Attention",
+    "question": "How robust is deep learning to label errors in the training set?",
+    "options": {
+      "A": "Not robust to any errors",
+      "B": "Fairly robust to random errors, but not to systematic errors",
+      "C": "Robust to systematic errors only",
+      "D": "Labels do not matter at all"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000503.png",
+    "correctText": "Fairly robust to random errors, but not to systematic errors",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 78,
+    "section": "RNN, NLP & Attention",
+    "question": "When correcting mislabeled examples in the dev set, what should you also do?",
+    "options": {
+      "A": "Correct only the training set",
+      "B": "Only look at examples the algorithm got wrong",
+      "C": "Remove the test set",
+      "D": "Apply the same process to the test set so dev and test stay on the same distribution"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000507.png",
+    "correctText": "Apply the same process to the test set so dev and test stay on the same distribution",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 79,
+    "section": "RNN, NLP & Attention",
+    "question": "Cat app: 200,000 web images + 10,000 app images. Which split is recommended?",
+    "options": {
+      "A": "Train on all web images + 5,000 app images; dev and test use only app images",
+      "B": "Shuffle all 210,000 images and split randomly",
+      "C": "Use only web images for dev and test",
+      "D": "Use only the 10,000 app images and discard web data"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000511.png",
+    "correctText": "Train on all web images + 5,000 app images; dev and test use only app images",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 80,
+    "section": "RNN, NLP & Attention",
+    "question": "What is the purpose of a training-dev set?",
+    "options": {
+      "A": "To replace the test set",
+      "B": "To tune the learning rate only",
+      "C": "To separate variance from data mismatch, since it has the training distribution but is not trained on",
+      "D": "To store augmented data"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000516.png",
+    "correctText": "To separate variance from data mismatch, since it has the training distribution but is not trained on",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 81,
+    "section": "RNN, NLP & Attention",
+    "question": "Train 1%, training-dev 1.5%, dev 10% (human = 0%). What is the main problem?",
+    "options": {
+      "A": "Data mismatch",
+      "B": "High variance",
+      "C": "Avoidable bias",
+      "D": "Overfitting the dev set"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000519.png",
+    "correctText": "Data mismatch",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 82,
+    "section": "RNN, NLP & Attention",
+    "question": "When does transfer learning from task A to task B make sense?",
+    "options": {
+      "A": "When B has much more data than A",
+      "B": "When A and B have different input types",
+      "C": "When low-level features from A are useless for B",
+      "D": "When A and B share the same input type and A has much more data than B"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000524.png",
+    "correctText": "When A and B share the same input type and A has much more data than B",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 83,
+    "section": "RNN, NLP & Attention",
+    "question": "In multi-task learning for self-driving (pedestrian, car, stop sign, traffic light), what does the output layer use?",
+    "options": {
+      "A": "One softmax over 4 classes",
+      "B": "Four independent sigmoid units, since one image can have several labels",
+      "C": "A single linear unit",
+      "D": "A ReLU unit per class"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000528.png",
+    "correctText": "Four independent sigmoid units, since one image can have several labels",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 84,
+    "section": "RNN, NLP & Attention",
+    "question": "What is the key requirement for end-to-end deep learning to work well?",
+    "options": {
+      "A": "A hand-designed pipeline",
+      "B": "Using phonemes",
+      "C": "Enough data to learn the complex mapping from x to y",
+      "D": "A very small network"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000532.png",
+    "correctText": "Enough data to learn the complex mapping from x to y",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 86,
+    "section": "Convolutional Neural Networks",
+    "question": "A 1000x1000x3 image feeds a fully connected layer of 1000 units. Roughly how many parameters does W“ have?",
+    "options": {
+      "A": "3 million",
+      "B": "3 billion",
+      "C": "1 million",
+      "D": "12,288"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000542.png",
+    "correctText": "3 billion",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 87,
+    "section": "Convolutional Neural Networks",
+    "question": "What does \"parameter sharing\" mean in a CNN?",
+    "options": {
+      "A": "All layers use the same learning rate",
+      "B": "Every image shares the same label",
+      "C": "Weights are copied between networks",
+      "D": "A feature detector useful in one part of the image is also useful in another part"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000545.png",
+    "correctText": "A feature detector useful in one part of the image is also useful in another part",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 88,
+    "section": "Convolutional Neural Networks",
+    "question": "What does \"sparsity of connections\" mean in a CNN?",
+    "options": {
+      "A": "Each output value depends only on a small number of inputs (an f × f region)",
+      "B": "Most weights are zero",
+      "C": "Only a few images are used for training",
+      "D": "Layers are randomly disconnected"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000550.png",
+    "correctText": "Each output value depends only on a small number of inputs (an f × f region)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 89,
+    "section": "Convolutional Neural Networks",
+    "question": "Which filter detects vertical edges?",
+    "options": {
+      "A": "[[1, 0, -1], [1, 0, -1], [1, 0, -1]]",
+      "B": "[[1, 1, 1], [0, 0, 0], [-1, -1, -1]]",
+      "C": "[[0, 0, 0], [0, 1, 0], [0, 0, 0]]",
+      "D": "[[1, 1, 1], [1, 1, 1], [1, 1, 1]]"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000554.png",
+    "correctText": "[[1, 0, -1], [1, 0, -1], [1, 0, -1]]",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 90,
+    "section": "Convolutional Neural Networks",
+    "question": "A 6x6 grayscale image is convolved with a 3x3 filter (no padding, stride 1). What is the output size?",
+    "options": {
+      "A": "6x6",
+      "B": "3x3",
+      "C": "4x4",
+      "D": "8x8"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000558.png",
+    "correctText": "4x4",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 91,
+    "section": "Convolutional Neural Networks",
+    "question": "What is the Sobel filter?",
+    "options": {
+      "A": "[[3, 0, −3], [10, 0, −10], [3, 0, −3]]",
+      "B": "[[1, 1, 1], [0, 0, 0], [−1, −1, −1]]",
+      "C": "A 1×1 filter",
+      "D": "[[1, 0, −1], [2, 0, −2], [1, 0, −1]]"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000602.png",
+    "correctText": "[[1, 0, −1], [2, 0, −2], [1, 0, −1]]",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 92,
+    "section": "Convolutional Neural Networks",
+    "question": "What is the deep learning approach to edge detection?",
+    "options": {
+      "A": "Hand-design every filter",
+      "B": "Treat the filter values as parameters and learn them with backprop",
+      "C": "Use only Sobel filters",
+      "D": "Avoid edge detection entirely"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000607.png",
+    "correctText": "Treat the filter values as parameters and learn them with backprop",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 93,
+    "section": "Convolutional Neural Networks",
+    "question": "In deep learning, what operation is usually called \"convolution\"?",
+    "options": {
+      "A": "Matrix inversion",
+      "B": "Fourier transform",
+      "C": "Cross-correlation (the filter is not flipped)",
+      "D": "Max pooling"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000613.png",
+    "correctText": "Cross-correlation (the filter is not flipped)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 94,
+    "section": "Convolutional Neural Networks",
+    "question": "Which two problems does padding solve?",
+    "options": {
+      "A": "The image shrinks after each layer, and border pixels are used less, losing information",
+      "B": "Too many parameters and overfitting",
+      "C": "Exploding and vanishing gradients",
+      "D": "Slow GPUs and small batches"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000617.png",
+    "correctText": "The image shrinks after each layer, and border pixels are used less, losing information",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 95,
+    "section": "Convolutional Neural Networks",
+    "question": "What padding gives a \"same\" convolution with filter size f (stride 1)?",
+    "options": {
+      "A": "p=0",
+      "B": "p=f",
+      "C": "p=f-1",
+      "D": "p=(f-1)/2"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000621.png",
+    "correctText": "p=(f-1)/2",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 96,
+    "section": "Convolutional Neural Networks",
+    "question": "Why is the filter size f usually odd?",
+    "options": {
+      "A": "Odd sizes need fewer parameters",
+      "B": "It allows symmetric padding and gives the filter a central pixel",
+      "C": "Even sizes cannot be trained",
+      "D": "GPUs only support odd sizes"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000625.png",
+    "correctText": "It allows symmetric padding and gives the filter a central pixel",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 97,
+    "section": "Convolutional Neural Networks",
+    "question": "A 7x7 input is convolved with a 3x3 filter, stride 2, no padding. What is the output size?",
+    "options": {
+      "A": "3x3",
+      "B": "5x5",
+      "C": "4x4",
+      "D": "2x2"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000629.png",
+    "correctText": "3x3",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 98,
+    "section": "Convolutional Neural Networks",
+    "question": "Input 100x100, f = 6, p = 7, s = 4. What is the output size?",
+    "options": {
+      "A": "25x25",
+      "B": "27x27",
+      "C": "28x28",
+      "D": "30x30"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000632.png",
+    "correctText": "28x28",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 99,
+    "section": "Convolutional Neural Networks",
+    "question": "When convolving an RGB image, how many channels must each filter have?",
+    "options": {
+      "A": "1",
+      "B": "As many as the number of filters",
+      "C": "Always 64",
+      "D": "The same number as the input channels (3)"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000636.png",
+    "correctText": "The same number as the input channels (3)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 100,
+    "section": "Convolutional Neural Networks",
+    "question": "A 6x6x3 input is convolved with two 3x3x3 filters (vertical and horizontal edges). What is the output?",
+    "options": {
+      "A": "4x4x3",
+      "B": "4x4x2",
+      "C": "6x6x2",
+      "D": "4x4x6"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000641.png",
+    "correctText": "4x4x2",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 101,
+    "section": "Convolutional Neural Networks",
+    "question": "A layer has 10 filters of size 3x3x3. How many parameters does it have (including biases)?",
+    "options": {
+      "A": "270",
+      "B": "90",
+      "C": "280",
+      "D": "300"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000644.png",
+    "correctText": "280",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 102,
+    "section": "Convolutional Neural Networks",
+    "question": "What is the total weight shape of convolution layer l?",
+    "options": {
+      "A": "f^(l) × f^(l) × n_c^(l−1) × n_c^(l)",
+      "B": "n_H^(l) × n_W^(l) × n_c^(l)",
+      "C": "f^(l) × f^(l)",
+      "D": "1 × 1 × 1 × n_c^(l)"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000648.png",
+    "correctText": "f^(l) × f^(l) × n_c^(l−1) × n_c^(l)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 103,
+    "section": "Convolutional Neural Networks",
+    "question": "Input 39x39x3, CONV with f = 3, s = 1, p = 0 and 10 filters. What is the output?",
+    "options": {
+      "A": "39x39x10",
+      "B": "36x36x10",
+      "C": "13x13x10",
+      "D": "37x37x10"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000652.png",
+    "correctText": "37x37x10",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 104,
+    "section": "Convolutional Neural Networks",
+    "question": "As you go deeper in a typical CNN, what happens to n_H, n_W and n_c?",
+    "options": {
+      "A": "All three increase",
+      "B": "n_H and n_W decrease, n_c increases",
+      "C": "n_H and n_W increase, n_c decreases",
+      "D": "All three stay the same"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000656.png",
+    "correctText": "n_H and n_W decrease, n_c increases",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 105,
+    "section": "Convolutional Neural Networks",
+    "question": "Max pooling with f = 2, s = 2 is applied to a 4x4 input. What is the output size?",
+    "options": {
+      "A": "2x2",
+      "B": "3x3",
+      "C": "4x4",
+      "D": "1x1"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000700.png",
+    "correctText": "2x2",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 106,
+    "section": "Convolutional Neural Networks",
+    "question": "How many learnable parameters does a pooling layer have?",
+    "options": {
+      "A": "f × f",
+      "B": "One per channel",
+      "C": "None",
+      "D": "f × f × n_c"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000703.png",
+    "correctText": "None",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 107,
+    "section": "Convolutional Neural Networks",
+    "question": "How does pooling treat the channels of its input?",
+    "options": {
+      "A": "It sums all channels into one",
+      "B": "It doubles the number of channels",
+      "C": "It keeps only the first channel",
+      "D": "It pools each channel separately, so the number of channels is unchanged"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000707.png",
+    "correctText": "It pools each channel separately, so the number of channels is unchanged",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 108,
+    "section": "Convolutional Neural Networks",
+    "question": "In the LeNet-style example, CONV1 has 6 filters of 5x5 on a 32x32x3 input. How many parameters does CONV1 have?",
+    "options": {
+      "A": "150",
+      "B": "456",
+      "C": "4704",
+      "D": "2416"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000710.png",
+    "correctText": "456",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 109,
+    "section": "Convolutional Neural Networks",
+    "question": "In a typical CNN such as LeNet-5, where are most of the parameters?",
+    "options": {
+      "A": "In the pooling layers",
+      "B": "In the input layer",
+      "C": "In the fully connected layers",
+      "D": "In the first convolution layer"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000715.png",
+    "correctText": "In the fully connected layers",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 110,
+    "section": "Convolutional Neural Networks",
+    "question": "Which statement about LeNet-5 is correct?",
+    "options": {
+      "A": "It was proposed by Yann LeCun et al. (1998), takes 32x32x1 inputs and has about 60K parameters",
+      "B": "It has about 138M parameters",
+      "C": "It uses 227x227x3 inputs",
+      "D": "It introduced skip connections"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000718.png",
+    "correctText": "It was proposed by Yann LeCun et al. (1998), takes 32x32x1 inputs and has about 60K parameters",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 111,
+    "section": "Convolutional Neural Networks",
+    "question": "Which statement about AlexNet is correct?",
+    "options": {
+      "A": "It has about 60K parameters",
+      "B": "It has about 60M parameters and popularized ReLU",
+      "C": "It uses only 3x3 filters",
+      "D": "It was designed for mobile devices"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000722.png",
+    "correctText": "It has about 60M parameters and popularized ReLU",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 112,
+    "section": "Convolutional Neural Networks",
+    "question": "What characterizes VGG-16?",
+    "options": {
+      "A": "Inception modules with parallel filters",
+      "B": "Depthwise separable convolutions",
+      "C": "Residual connections",
+      "D": "Uniform 3x3 same convolutions and 2x2 max-pools, about 138M parameters"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000725.png",
+    "correctText": "Uniform 3x3 same convolutions and 2x2 max-pools, about 138M parameters",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 113,
+    "section": "Convolutional Neural Networks",
+    "question": "In a residual block, how is a^[l+2] computed?",
+    "options": {
+      "A": "a^[l+2] = g(z^[l+2])",
+      "B": "a^[l+2] = a^[l]",
+      "C": "a^[l+2] = g(z^[l+2] + a^[l])",
+      "D": "a^[l+2] = z^[l+2] − a^[l]"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000729.png",
+    "correctText": "a^[l+2] = g(z^[l+2] + a^[l])",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 114,
+    "section": "Convolutional Neural Networks",
+    "question": "Why does adding residual blocks rarely hurt performance?",
+    "options": {
+      "A": "A residual block can easily learn the identity function when W, b = 0",
+      "B": "Residual blocks have no parameters",
+      "C": "They remove the need for activations",
+      "D": "They use larger filters"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000734.png",
+    "correctText": "A residual block can easily learn the identity function when W, b = 0",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 115,
+    "section": "Convolutional Neural Networks",
+    "question": "In ResNet, what is done if z^[l+2] and a^[l] have different dimensions?",
+    "options": {
+      "A": "The skip connection is removed",
+      "B": "Max pooling is applied to z",
+      "C": "The block is skipped",
+      "D": "a^[l] is multiplied by a matrix W_s"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000738.png",
+    "correctText": "a^[l] is multiplied by a matrix W_s",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 116,
+    "section": "Convolutional Neural Networks",
+    "question": "What is a main use of 1x1 convolutions?",
+    "options": {
+      "A": "To increase height and width",
+      "B": "To shrink the number of channels (e.g., 28x28x192 — 28x28x32)",
+      "C": "To detect edges",
+      "D": "To replace pooling"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000741.png",
+    "correctText": "To shrink the number of channels (e.g., 28x28x192 — 28x28x32)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 117,
+    "section": "Convolutional Neural Networks",
+    "question": "Computing 28x28x32 outputs from 28x28x192 with a direct 5x5 same convolution costs about how many multiplications?",
+    "options": {
+      "A": "2.4 million",
+      "B": "12.4 million",
+      "C": "120 million",
+      "D": "1.2 billion"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000746.png",
+    "correctText": "120 million",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 118,
+    "section": "Convolutional Neural Networks",
+    "question": "Using a 1x1 bottleneck (16 filters) before the 5x5 convolution reduces the cost to about how much?",
+    "options": {
+      "A": "12.4 million",
+      "B": "120 million",
+      "C": "60 million",
+      "D": "1 million"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000750.png",
+    "correctText": "12.4 million",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 119,
+    "section": "Convolutional Neural Networks",
+    "question": "What is the purpose of the side branches in GoogLeNet (Inception network)?",
+    "options": {
+      "A": "Making predictions from intermediate layers, which has a regularizing effect",
+      "B": "Increasing the input resolution",
+      "C": "Replacing the softmax",
+      "D": "Computing residual connections"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000755.png",
+    "correctText": "Making predictions from intermediate layers, which has a regularizing effect",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 120,
+    "section": "Convolutional Neural Networks",
+    "question": "What does MobileNet replace normal convolutions with?",
+    "options": {
+      "A": "5×5 convolutions",
+      "B": "Fully connected layers",
+      "C": "Average pooling",
+      "D": "Depthwise separable convolutions (depthwise + pointwise)"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000759.png",
+    "correctText": "Depthwise separable convolutions (depthwise + pointwise)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 121,
+    "section": "Convolutional Neural Networks",
+    "question": "For input 6×6×3 and output 4×4×5, how do the costs of normal and depthwise separable convolution compare?",
+    "options": {
+      "A": "672 vs 2160",
+      "B": "2160 vs 2160",
+      "C": "2160 vs 672",
+      "D": "432 vs 240"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000804.png",
+    "correctText": "2160 vs 672",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 122,
+    "section": "Convolutional Neural Networks",
+    "question": "What does a MobileNet v2 bottleneck block contain?",
+    "options": {
+      "A": "Expansion (1x1) — depthwise — projection (pointwise), plus a residual connection",
+      "B": "Only a 5x5 convolution",
+      "C": "Three fully connected layers",
+      "D": "An inception module"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000809.png",
+    "correctText": "Expansion (1x1) — depthwise — projection (pointwise), plus a residual connection",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 123,
+    "section": "Convolutional Neural Networks",
+    "question": "What is the key idea of EfficientNet?",
+    "options": {
+      "A": "Removing all pooling layers",
+      "B": "Using only 1x1 convolutions",
+      "C": "Training without labels",
+      "D": "Compound scaling of resolution, depth and width according to the compute budget"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000814.png",
+    "correctText": "Compound scaling of resolution, depth and width according to the compute budget",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 124,
+    "section": "Convolutional Neural Networks",
+    "question": "For transfer learning with very little data (Tigger / Misty / Neither), what should you do?",
+    "options": {
+      "A": "Train the whole network from scratch",
+      "B": "Freeze all pre-trained layers and train only a new softmax layer",
+      "C": "Use no pre-trained weights",
+      "D": "Retrain all layers with random initialization"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000818.png",
+    "correctText": "Freeze all pre-trained layers and train only a new softmax layer",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 125,
+    "section": "Convolutional Neural Networks",
+    "question": "What is color shifting in data augmentation?",
+    "options": {
+      "A": "Converting images to grayscale",
+      "B": "Rotating images by 90°",
+      "C": "Adding or subtracting values to the R, G, B channels to be robust to lighting changes",
+      "D": "Changing the image labels"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000824.png",
+    "correctText": "Adding or subtracting values to the R, G, B channels to be robust to lighting changes",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 126,
+    "section": "Convolutional Neural Networks",
+    "question": "Ensembling and multi-crop at test time are mainly used for what?",
+    "options": {
+      "A": "Winning benchmarks and competitions; they are rarely used in deployed systems",
+      "B": "Reducing compute cost in production",
+      "C": "Training faster",
+      "D": "Replacing data augmentation"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000830.png",
+    "correctText": "Winning benchmarks and competitions; they are rarely used in deployed systems",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 127,
+    "section": "Convolutional Neural Networks",
+    "question": "In classification with localization, what do b_x, b_y, b_h, b_w represent?",
+    "options": {
+      "A": "Four class probabilities",
+      "B": "The center (b_x, b_y) and the height and width (b_h, b_w) of the bounding box",
+      "C": "The top-left and bottom-right corners",
+      "D": "Landmark coordinates"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000834.png",
+    "correctText": "The center (b_x, b_y) and the height and width (b_h, b_w) of the bounding box",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 128,
+    "section": "Convolutional Neural Networks",
+    "question": "What is the target label y when there is no object in the image?",
+    "options": {
+      "A": "All zeros",
+      "B": "[1, ?, ?, ?, ?, ?, ?, ?]",
+      "C": "[0, 0, 0, 0, 0, 1, 0, 0]",
+      "D": "[0, ?, ?, ?, ?, ?, ?, ?], where \"2\" means don't care"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000837.png",
+    "correctText": "[0, ?, ?, ?, ?, ?, ?, ?], where \"2\" means don't care",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 129,
+    "section": "Convolutional Neural Networks",
+    "question": "A face landmark detector predicts 64 points plus whether a face is present. How many outputs does it have?",
+    "options": {
+      "A": "64",
+      "B": "65",
+      "C": "129",
+      "D": "256"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000842.png",
+    "correctText": "129",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 130,
+    "section": "Convolutional Neural Networks",
+    "question": "What is the main drawback of sliding windows detection?",
+    "options": {
+      "A": "Very high computational cost",
+      "B": "It cannot detect cars",
+      "C": "It needs no training data",
+      "D": "It only works on grayscale images"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000847.png",
+    "correctText": "Very high computational cost",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 131,
+    "section": "Convolutional Neural Networks",
+    "question": "In the convolutional implementation of sliding windows, how is an FC layer of 400 units replaced?",
+    "options": {
+      "A": "By a max pooling layer",
+      "B": "By a dropout layer",
+      "C": "By a softmax layer",
+      "D": "By 400 filters of size 5x5, giving a 1x1x400 output"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000852.png",
+    "correctText": "By 400 filters of size 5x5, giving a 1x1x400 output",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 132,
+    "section": "Convolutional Neural Networks",
+    "question": "A network trained on 14x14x3 crops is run convolutionally on a 16x16x3 image. What is the output?",
+    "options": {
+      "A": "1x1x4",
+      "B": "2x2x4",
+      "C": "8x8x4",
+      "D": "4x4x4"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000856.png",
+    "correctText": "2x2x4",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 133,
+    "section": "Convolutional Neural Networks",
+    "question": "In YOLO, which grid cell is responsible for an object?",
+    "options": {
+      "A": "Every cell the object touches",
+      "B": "The top-left cell",
+      "C": "The cell containing the object's midpoint",
+      "D": "The cell with the most pixels of the object"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000900.png",
+    "correctText": "The cell containing the object's midpoint",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 134,
+    "section": "Convolutional Neural Networks",
+    "question": "In YOLO, which statement about b_h and b_w is true?",
+    "options": {
+      "A": "They must be between 0 and 1",
+      "B": "They are measured in pixels",
+      "C": "They are always equal",
+      "D": "They are fractions of the cell size and can be greater than 1"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000904.png",
+    "correctText": "They are fractions of the cell size and can be greater than 1",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 135,
+    "section": "Convolutional Neural Networks",
+    "question": "By convention, when is a detection considered \"correct\" using loU?",
+    "options": {
+      "A": "When IoU 2 0.5",
+      "B": "When loU = 0",
+      "C": "When IoU 2 0.1",
+      "D": "When IoU < 0.5"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000908.png",
+    "correctText": "When IoU 2 0.5",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 136,
+    "section": "Convolutional Neural Networks",
+    "question": "What is the first step of non-max suppression in the 19x19 YOLO example?",
+    "options": {
+      "A": "Keep every box",
+      "B": "Discard all boxes with p_c s 0.6",
+      "C": "Sort boxes by width",
+      "D": "Merge all boxes into one"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000911.png",
+    "correctText": "Discard all boxes with p_c s 0.6",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 137,
+    "section": "Convolutional Neural Networks",
+    "question": "After outputting the box with the highest p_c, what does NMS discard?",
+    "options": {
+      "A": "All boxes with lower p_c",
+      "B": "Boxes of other classes",
+      "C": "Remaining boxes with loU 2 0.5 with the chosen box",
+      "D": "Boxes with loU < 0.5"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000915.png",
+    "correctText": "Remaining boxes with loU 2 0.5 with the chosen box",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 138,
+    "section": "Convolutional Neural Networks",
+    "question": "What problem do anchor boxes solve?",
+    "options": {
+      "A": "Two objects whose midpoints fall in the same grid cell",
+      "B": "Slow training",
+      "C": "Too many classes",
+      "D": "Low image resolution"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000920.png",
+    "correctText": "Two objects whose midpoints fall in the same grid cell",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 139,
+    "section": "Convolutional Neural Networks",
+    "question": "YOLO with a 3×3 grid, 2 anchor boxes and 3 classes outputs what volume?",
+    "options": {
+      "A": "3×3×8",
+      "B": "3×3×6",
+      "C": "3×3×24",
+      "D": "3×3×16"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000924.png",
+    "correctText": "3×3×16",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 140,
+    "section": "Convolutional Neural Networks",
+    "question": "How are anchor box shapes chosen?",
+    "options": {
+      "A": "They are learned by backprop only",
+      "B": "By hand (5—10 shapes) or with K-means",
+      "C": "They are always squares",
+      "D": "One per image [Pe \"J"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000927.png",
+    "correctText": "By hand (5—10 shapes) or with K-means",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 141,
+    "section": "Convolutional Neural Networks",
+    "question": "What does Faster R-CNN change compared with Fast R-CNN?",
+    "options": {
+      "A": "It removes region proposals",
+      "B": "It uses a segmentation algorithm to propose regions",
+      "C": "It uses a convolutional network to propose regions",
+      "D": "It classifies one region at a time"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000931.png",
+    "correctText": "It uses a convolutional network to propose regions",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 142,
+    "section": "Convolutional Neural Networks",
+    "question": "What does semantic segmentation do?",
+    "options": {
+      "A": "Draws one box per object",
+      "B": "Assigns a label to the whole image",
+      "C": "Detects landmarks",
+      "D": "Assigns a label to every pixel"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000935.png",
+    "correctText": "Assigns a label to every pixel",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 143,
+    "section": "Convolutional Neural Networks",
+    "question": "A transpose convolution with a 2x2 input, 3x3 filter, p = 1 and s = 2 gives what output size?",
+    "options": {
+      "A": "4x4",
+      "B": "2x2",
+      "C": "3x3",
+      "D": "6x6"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000938.png",
+    "correctText": "4x4",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 144,
+    "section": "Convolutional Neural Networks",
+    "question": "What is the role of skip connections in U-Net?",
+    "options": {
+      "A": "To reduce the number of classes",
+      "B": "To combine high-level context from the encoder path with low-level detail for precise pixel labels",
+      "C": "To replace transpose convolutions",
+      "D": "To speed up max pooling"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000943.png",
+    "correctText": "To combine high-level context from the encoder path with low-level detail for precise pixel labels",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 145,
+    "section": "Convolutional Neural Networks",
+    "question": "What is the difference between face verification and face recognition?",
+    "options": {
+      "A": "Verification is 1:K, recognition is 1:1",
+      "B": "They are the same task",
+      "C": "Verification is 1:1 (is this the claimed person?), recognition is 1:K",
+      "D": "Recognition is easier than verification"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000946.png",
+    "correctText": "Verification is 1:1 (is this the claimed person?), recognition is 1:K",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 146,
+    "section": "Convolutional Neural Networks",
+    "question": "How is one-shot learning solved for face recognition?",
+    "options": {
+      "A": "Train a softmax with one class per person",
+      "B": "Retrain the network for each new employee",
+      "C": "Use only one layer",
+      "D": "Learn a similarity function d(img1, img2) and compare it with a threshold T"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000951.png",
+    "correctText": "Learn a similarity function d(img1, img2) and compare it with a threshold T",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 147,
+    "section": "Convolutional Neural Networks",
+    "question": "In triplet loss, what is the purpose of the margin a?",
+    "options": {
+      "A": "To prevent trivial solutions (e.g., all encodings equal) and push A-P and A-N pairs apart",
+      "B": "To set the learning rate",
+      "C": "To choose the number of images per person",
+      "D": "To normalize the images"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000955.png",
+    "correctText": "To prevent trivial solutions (e.g., all encodings equal) and push A-P and A-N pairs apart",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 148,
+    "section": "Convolutional Neural Networks",
+    "question": "In Neural Style Transfer, what does the style (Gram) matrix measure?",
+    "options": {
+      "A": "The pixel difference between C and G",
+      "B": "The correlation between activations of different channels in a layer",
+      "C": "The number of filters in VGG",
+      "D": "The size of the generated image"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 000959.png",
+    "correctText": "The correlation between activations of different channels in a layer",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 150,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Why is a standard neural network a poor fit for sequence data such as sentences?",
+    "options": {
+      "A": "It cannot use the softmax function",
+      "B": "It has too few parameters",
+      "C": "Inputs and outputs vary in length across examples, and it does not share features learned at different positions",
+      "D": "It cannot be trained with gradient descent"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001007.png",
+    "correctText": "Inputs and outputs vary in length across examples, and it does not share features learned at different positions",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 151,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "For x = \"Harry Potter and Hermione Granger invented a new spell\", what is x(3)?",
+    "options": {
+      "A": "\"and\"",
+      "B": "\"Potter\"",
+      "C": "\"Hermione\"",
+      "D": "\"Harry\""
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001011.png",
+    "correctText": "\"and\"",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 152,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "How is a word that is not in the vocabulary represented?",
+    "options": {
+      "A": "As a zero vector",
+      "B": "It is removed from the sentence",
+      "C": "As the token (EOS)",
+      "D": "As the token (UNK)"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001122.png",
+    "correctText": "As the token (UNK)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 153,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "In a basic RNN, how is a(0) usually initialized?",
+    "options": {
+      "A": "Randomly",
+      "B": "As a vector of zeros",
+      "C": "As the first word",
+      "D": "As a vector of ones"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001126.png",
+    "correctText": "As a vector of zeros",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 154,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Which statement about RNN parameters is correct?",
+    "options": {
+      "A": "W_aa, W_ax and W_ya are shared across all time steps",
+      "B": "Each time step has its own parameters",
+      "C": "Only the first step has parameters",
+      "D": "Parameters change size at every step PE\""
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001130.png",
+    "correctText": "W_aa, W_ax and W_ya are shared across all time steps",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 155,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Which activation is most commonly used to compute a(t) in an RNN?",
+    "options": {
+      "A": "Softmax",
+      "B": "Linear",
+      "C": "Tanh (sometimes ReLU)",
+      "D": "Sigmoid only"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001135.png",
+    "correctText": "Tanh (sometimes ReLU)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 156,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "If W_aa is 100×100 and W_ax is 100×10,000, what is the shape of W_a = [W_aa, W_ax]?",
+    "options": {
+      "A": "100×100",
+      "B": "10,000×100",
+      "C": "200×10,000",
+      "D": "100×10,100"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001139.png",
+    "correctText": "100×10,100",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 157,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Which three factors are given as the main reasons deep learning has taken off?",
+    "options": {
+      "A": "Cheaper storage, faster internet, more programmers",
+      "B": "Large amounts of data, computation power (GPUs) and algorithmic improvements",
+      "C": "Better compilers, cloud storage and open-source licenses",
+      "D": "Smaller models, less data and simpler algorithms"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001145.png",
+    "correctText": "Large amounts of data, computation power (GPUs) and algorithmic improvements",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 158,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What does the ReLU activation function compute?",
+    "options": {
+      "A": "1 / (1 + e^(−z))",
+      "B": "(e^z − e^(−z)) / (e^z + e^(−z))",
+      "C": "max(0.01z, z)",
+      "D": "max(0, z)"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001149.png",
+    "correctText": "max(0, z)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 159,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "In the house price example, what can the hidden units learn on their own?",
+    "options": {
+      "A": "Features such as family size, walkability and school quality",
+      "B": "The exact price of every house in the dataset",
+      "C": "The zip code of the buyer",
+      "D": "The learning rate of the network"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001153.png",
+    "correctText": "Features such as family size, walkability and school quality",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 160,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Which type of network is typically used for photo tagging (image — object 1...1000)?",
+    "options": {
+      "A": "Convolutional neural network (CNN)",
+      "B": "Standard neural network",
+      "C": "Recurrent neural network (RNN)",
+      "D": "Custom / hybrid network"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001704.png",
+    "correctText": "Convolutional neural network (CNN)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 161,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Which type of network is typically used for speech recognition and machine translation?",
+    "options": {
+      "A": "Standard neural network",
+      "B": "Convolutional neural network",
+      "C": "Recurrent neural network (RNN)",
+      "D": "Logistic regression"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001709.png",
+    "correctText": "Recurrent neural network (RNN)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 162,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Autonomous driving (image and radar — positions of other cars) typically uses which architecture?",
+    "options": {
+      "A": "Standard neural network only",
+      "B": "RNN only",
+      "C": "Logistic regression",
+      "D": "A custom / hybrid architecture"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001712.png",
+    "correctText": "A custom / hybrid architecture",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 163,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What is structured data?",
+    "options": {
+      "A": "Images, audio and video",
+      "B": "Tabular data where each column has a clear meaning, such as databases and spreadsheets",
+      "C": "Raw text from the web",
+      "D": "Data without any predefined format"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001716.png",
+    "correctText": "Tabular data where each column has a clear meaning, such as databases and spreadsheets",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 164,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Which of the following is unstructured data?",
+    "options": {
+      "A": "A table of house prices",
+      "B": "A transaction log with defined columns",
+      "C": "Images, audio and text",
+      "D": "A spreadsheet of user ages Lo"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001722.png",
+    "correctText": "Images, audio and text",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 165,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What happens to traditional algorithms (SVM, logistic regression) as the amount of data grows?",
+    "options": {
+      "A": "Their performance plateaus, while large neural networks keep improving",
+      "B": "They keep improving faster than neural networks",
+      "C": "They stop working completely",
+      "D": "They become larger neural networks"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001725.png",
+    "correctText": "Their performance plateaus, while large neural networks keep improving",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 166,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Why did switching from sigmoid to ReLU make gradient descent much faster?",
+    "options": {
+      "A": "ReLU has more parameters",
+      "B": "ReLU outputs probabilities",
+      "C": "ReLU removes the need for a bias",
+      "D": "Sigmoid has regions where the gradient is close to 0, which slows learning"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001729.png",
+    "correctText": "Sigmoid has regions where the gradient is close to 0, which slows learning",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 167,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Why does a faster Idea — Code — Experiment cycle matter?",
+    "options": {
+      "A": "It reduces the need for data",
+      "B": "It lets teams try and improve ideas much more quickly (from a month to a day)",
+      "C": "It removes the need for GPUs",
+      "D": "It guarantees a global minimum"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001734.png",
+    "correctText": "It lets teams try and improve ideas much more quickly (from a month to a day)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 168,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "A 64x64 RGB image is unrolled into a feature vector x. What is n_x?",
+    "options": {
+      "A": "64",
+      "B": "4096",
+      "C": "192",
+      "D": "12288"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001738.png",
+    "correctText": "12288",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 169,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "With m training examples, what is the shape of the matrix X?",
+    "options": {
+      "A": "(n_x, m)",
+      "B": "(m, n_x)",
+      "C": "(1, m)",
+      "D": "(m, 1) Po"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001741.png",
+    "correctText": "(n_x, m)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 170,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "With m training examples, what is the shape of Y in binary classification?",
+    "options": {
+      "A": "(m, m)",
+      "B": "(n_x, m)",
+      "C": "(1, m)",
+      "D": "(m, n_x)"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001745.png",
+    "correctText": "(1, m)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 171,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "In logistic regression, what does y represent?",
+    "options": {
+      "A": "The value of z",
+      "B": "P(y = 1 given x)",
+      "C": "The loss of one example",
+      "D": "The learning rate"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001749.png",
+    "correctText": "P(y = 1 given x)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 172,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Why is squared error not used as the loss for logistic regression?",
+    "options": {
+      "A": "It is too fast to compute",
+      "B": "It cannot be differentiated",
+      "C": "It makes the optimization problem non-convex",
+      "D": "It only works for multi-class problems"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001754.png",
+    "correctText": "It makes the optimization problem non-convex",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 173,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Which is the logistic regression loss for one example?",
+    "options": {
+      "A": "-(y log y + (1 - y) log(1 - y))",
+      "B": "(y-y//2",
+      "C": "max(0, 1 - yy)",
+      "D": "log(y) + log(y)"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001758.png",
+    "correctText": "-(y log y + (1 - y) log(1 - y))",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 174,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Minimizing the logistic regression cost J is equivalent to what?",
+    "options": {
+      "A": "Minimizing the number of parameters",
+      "B": "Maximizing the learning rate",
+      "C": "Minimizing the variance of the data",
+      "D": "Maximum likelihood estimation, assuming i.i.d. Examples"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001802.png",
+    "correctText": "Maximum likelihood estimation, assuming i.i.d. Examples",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 175,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Why does gradient descent on logistic regression reach a single global minimum?",
+    "options": {
+      "A": "Because the learning rate is fixed",
+      "B": "Because sigmoid is linear",
+      "C": "Because the cost function J is convex",
+      "D": "Because weights are initialized to zero"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001805.png",
+    "correctText": "Because the cost function J is convex",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 176,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "For f(a) = a², what is the slope at a = 2?",
+    "options": {
+      "A": "2",
+      "B": "4",
+      "C": "8",
+      "D": "12"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001809.png",
+    "correctText": "4",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 177,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "For f(a) = In(a), what is the slope at a = 2?",
+    "options": {
+      "A": "0.5",
+      "B": "2",
+      "C": "0.69",
+      "D": "1 (9)"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001812.png",
+    "correctText": "0.5",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 178,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "For J = 3(a + bc), what is dJ/db?",
+    "options": {
+      "A": "3",
+      "B": "3b",
+      "C": "bc",
+      "D": "3c"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001817.png",
+    "correctText": "3c",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 179,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "In the course’s code convention, what does the variable dvar mean?",
+    "options": {
+      "A": "The variance of var",
+      "B": "The derivative of the final output J with respect to var",
+      "C": "The difference between two values of var",
+      "D": "The derivative of var with respect to x"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001821.png",
+    "correctText": "The derivative of the final output J with respect to var",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 180,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "In logistic regression backprop, what is dz?",
+    "options": {
+      "A": "y-a",
+      "B": "a(1 - a)",
+      "C": "a-y",
+      "D": "-y/a \"J"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001824.png",
+    "correctText": "a-y",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 181,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "For z = w₁x₁ + w₂x₂ + b, what is dw₁?",
+    "options": {
+      "A": "x₁ · dz",
+      "B": "w₁ · dz",
+      "C": "dz / x₁",
+      "D": "x₂ · dz"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001828.png",
+    "correctText": "x₁ · dz",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 182,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What is the main drawback of the for-loop implementation of logistic regression?",
+    "options": {
+      "A": "It gives wrong derivatives",
+      "B": "It cannot handle binary labels",
+      "C": "It needs more memory for weights",
+      "D": "It needs two loops (over m examples and n features), which is slow on large data"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001848.png",
+    "correctText": "It needs two loops (over m examples and n features), which is slow on large data",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 183,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "In the dot product demo with one million elements, how did np.dot() compare to a for loop?",
+    "options": {
+      "A": "They took the same time",
+      "B": "np.dot() took about 1.5 ms vs about 500 ms for the loop (~300x faster)",
+      "C": "The for loop was faster",
+      "D": "np.dot() was only 2x faster"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001852.png",
+    "correctText": "np.dot() took about 1.5 ms vs about 500 ms for the loop (~300x faster)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 184,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Why are NumPy built-in functions faster than explicit loops?",
+    "options": {
+      "A": "They use less precise numbers",
+      "B": "They skip some elements",
+      "C": "They use parallel SIMD instructions on CPUs/GPUs",
+      "D": "They run on the network"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001856.png",
+    "correctText": "They use parallel SIMD instructions on CPUs/GPUs",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 185,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "In vectorized logistic regression, how is dw computed?",
+    "options": {
+      "A": "dw = np.sum(dZ)",
+      "B": "dw = np.dot(w.T, X)",
+      "C": "dw=A-Y",
+      "D": "dw = 1/m - np.dot(X, dZ.T)"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001900.png",
+    "correctText": "dw = 1/m - np.dot(X, dZ.T)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 186,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Which for loop cannot be removed by vectorization in logistic regression?",
+    "options": {
+      "A": "The outer loop over gradient descent iterations",
+      "B": "The loop over training examples",
+      "C": "The loop over features",
+      "D": "The loop computing the sigmoid"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001904.png",
+    "correctText": "The outer loop over gradient descent iterations",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 187,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "In broadcasting, what happens in (m, n) + (1, n)?",
+    "options": {
+      "A": "An error is raised",
+      "B": "The (1, n) array is copied into m rows",
+      "C": "The (m, n) array is reduced to (1, n)",
+      "D": "The (1, n) array is copied into n columns el"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001907.png",
+    "correctText": "The (1, n) array is copied into m rows",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 188,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What is [1 2 3 4] + 100 in NumPy?",
+    "options": {
+      "A": "[1 23 4 100]",
+      "B": "110",
+      "C": "[101 102 103 104]",
+      "D": "An error"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001911.png",
+    "correctText": "[101 102 103 104]",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 189,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Which practice helps avoid bugs with NumPy shapes?",
+    "options": {
+      "A": "Use np.random.randn(5, 1) instead of np.random.randn(5) and add shape asserts",
+      "B": "Always use rank-1 arrays of shape (n,)",
+      "C": "Never use reshape",
+      "D": "Avoid broadcasting entirely Po"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001914.png",
+    "correctText": "Use np.random.randn(5, 1) instead of np.random.randn(5) and add shape asserts",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 190,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "In the calories example, how is the total calories per food computed?",
+    "options": {
+      "A": "cal = A.sum(axis=1)",
+      "B": "cal = A.mean()",
+      "C": "cal = A.reshape(4, 1)",
+      "D": "cal = A.sum(axis=0)"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001918.png",
+    "correctText": "cal = A.sum(axis=0)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 191,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "A network with 3 inputs, one hidden layer of 4 units and 1 output is called what?",
+    "options": {
+      "A": "A 3-layer network",
+      "B": "A 2-layer network (the input layer is not counted)",
+      "C": "A 1-layer network",
+      "D": "A deep network"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001923.png",
+    "correctText": "A 2-layer network (the input layer is not counted)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 192,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Why is the hidden layer called \"hidden\"?",
+    "options": {
+      "A": "Its true values are not observed in the training set",
+      "B": "It has no parameters",
+      "C": "It is never updated",
+      "D": "It is skipped during prediction"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001927.png",
+    "correctText": "Its true values are not observed in the training set",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 193,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "For a 3–4–1 network, what is the shape of W^(1)?",
+    "options": {
+      "A": "(3, 4)",
+      "B": "(1, 4)",
+      "C": "(4, 3)",
+      "D": "(4, 1)"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001930.png",
+    "correctText": "(4, 3)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 194,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "How many learnable parameters does a 3 — 4 — 1 network have?",
+    "options": {
+      "A": "16",
+      "B": "5",
+      "C": "12",
+      "D": "21"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001934.png",
+    "correctText": "21",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 195,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "In the matrices Z and A of a vectorized network, what do the horizontal and vertical indices represent?",
+    "options": {
+      "A": "Horizontal = hidden units, vertical = training examples",
+      "B": "Horizontal = training examples, vertical = hidden units",
+      "C": "Both index training examples",
+      "D": "Both index layers"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001938.png",
+    "correctText": "Horizontal = training examples, vertical = hidden units",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 196,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Why is tanh usually better than sigmoid for hidden layers?",
+    "options": {
+      "A": "It has no saturation",
+      "B": "It outputs only positive values",
+      "C": "Its output has a mean close to 0",
+      "D": "It is cheaper to compute than ReLU"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001942.png",
+    "correctText": "Its output has a mean close to 0",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 197,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What is the derivative of the sigmoid activation in terms of a = g(z)?",
+    "options": {
+      "A": "a(1 - a)",
+      "B": "1 - a?",
+      "C": "1ifz>0, else 0",
+      "D": "a?"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001946.png",
+    "correctText": "a(1 - a)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 198,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What is the derivative of tanh in terms of a = g(z)?",
+    "options": {
+      "A": "a(1 - a)",
+      "B": "0.01 ifz<0",
+      "C": "1 - a?",
+      "D": "ez"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001949.png",
+    "correctText": "1 - a?",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 199,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What problem does Leaky ReLU address?",
+    "options": {
+      "A": "Exploding outputs for large z",
+      "B": "\"Dead neurons\" when z < 0",
+      "C": "Non-convex loss functions",
+      "D": "Slow matrix multiplication"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001953.png",
+    "correctText": "\"Dead neurons\" when z < 0",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 200,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Which activation is the default choice for hidden layers?",
+    "options": {
+      "A": "Sigmoid",
+      "B": "Linear",
+      "C": "Softmax",
+      "D": "ReLU"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 001957.png",
+    "correctText": "ReLU",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 201,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What happens if every hidden layer uses a linear (identity) activation?",
+    "options": {
+      "A": "The whole network is still just a linear function of the input",
+      "B": "The network learns faster nonlinear boundaries",
+      "C": "The network cannot be trained",
+      "D": "The network becomes a CNN"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002001.png",
+    "correctText": "The whole network is still just a linear function of the input",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 202,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Where is a linear activation acceptable?",
+    "options": {
+      "A": "In every hidden layer",
+      "B": "In the first layer of a CNN",
+      "C": "In the gates of an LSTM",
+      "D": "In the output layer of a regression problem, such as house price prediction"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002004.png",
+    "correctText": "In the output layer of a regression problem, such as house price prediction",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 203,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "In a 2-layer network, how is dZ^(1) computed?",
+    "options": {
+      "A": "dZ^(1) = A^(1) − Y",
+      "B": "dZ^(1) = (W^(2).T @ dZ^(2)) element-wise multiplied by g′^(1)(Z^(1))",
+      "C": "dZ^(1) = W^(1) @ X",
+      "D": "dZ^(1) = np.sum(dZ^(2))"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002007.png",
+    "correctText": "dZ^(1) = (W^(2).T @ dZ^(2)) element-wise multiplied by g′^(1)(Z^(1))",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 204,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What is the purpose of keepdims=True in np.sum(dZ, axis=1, keepdims=True)?",
+    "options": {
+      "A": "To make the sum faster",
+      "B": "To sum over all axes",
+      "C": "To keep the shape (n, 1) instead of producing a rank-1 array",
+      "D": "To keep the original values of dZ"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002011.png",
+    "correctText": "To keep the shape (n, 1) instead of producing a rank-1 array",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 205,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What happens if all weights are initialized to zero in a neural network?",
+    "options": {
+      "A": "Symmetry: every hidden unit computes the same function and gets the same update",
+      "B": "The network trains faster",
+      "C": "Gradients explode",
+      "D": "Only the bias is learned correctly, which is enough"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002014.png",
+    "correctText": "Symmetry: every hidden unit computes the same function and gets the same update",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 206,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Why are random weights multiplied by 0.01 at initialization?",
+    "options": {
+      "A": "To make the network deeper",
+      "B": "To increase the learning rate",
+      "C": "To break symmetry in the bias",
+      "D": "To keep z small and avoid the saturated regions of sigmoid/tanh"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002418.png",
+    "correctText": "To keep z small and avoid the saturated regions of sigmoid/tanh",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 207,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Is it fine to initialize the bias b to zeros?",
+    "options": {
+      "A": "No, it always causes symmetry",
+      "B": "No, the bias must be random",
+      "C": "Yes, a zero bias does not cause the symmetry problem",
+      "D": "Only for the output layer"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002423.png",
+    "correctText": "Yes, a zero bias does not cause the symmetry problem",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 208,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "In deep network notation, what does L represent?",
+    "options": {
+      "A": "The loss function",
+      "B": "The number of layers, not counting the input layer",
+      "C": "The learning rate",
+      "D": "The number of training examples"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002427.png",
+    "correctText": "The number of layers, not counting the input layer",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 209,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What is the shape of W^(l)?",
+    "options": {
+      "A": "(n^(l), n^(l−1))",
+      "B": "(n^(l−1), n^(l))",
+      "C": "(n^(l), 1)",
+      "D": "(n^(l), m)"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002430.png",
+    "correctText": "(n^(l), n^(l−1))",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 210,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What is the shape of b^(l)?",
+    "options": {
+      "A": "(1, n^(l))",
+      "B": "(n, 1)",
+      "C": "(n^(l), m)",
+      "D": "(n^(l), 1)"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002434.png",
+    "correctText": "(n^(l), 1)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 211,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "In the example with n^(0) = 2 and n^(1) = 3, what is the shape of W^(1)?",
+    "options": {
+      "A": "(2, 3)",
+      "B": "(3, 2)",
+      "C": "(3, 1)",
+      "D": "(2, 1)"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002439.png",
+    "correctText": "(3, 2)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 212,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "With m training examples, what is the shape of Z^(l) and A^(l)?",
+    "options": {
+      "A": "(n^(l), 1)",
+      "B": "(m, n^(l))",
+      "C": "(n^(l), m)",
+      "D": "(n^(l−1), m)"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002443.png",
+    "correctText": "(n^(l), m)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 213,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "In forward propagation of a deep network, can the for loop over layers | = 1..L be removed?",
+    "options": {
+      "A": "No, the loop over layers cannot be avoided",
+      "B": "Yes, with broadcasting",
+      "C": "Yes, with np.dot",
+      "D": "Yes, by using a single huge matrix"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002447.png",
+    "correctText": "No, the loop over layers cannot be avoided",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 214,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "According to the face recognition intuition, what do the layers of a deep network learn in order?",
+    "options": {
+      "A": "Faces — face parts — edges",
+      "B": "Words — phonemes — audio",
+      "C": "Colors only",
+      "D": "Edges — face parts — whole faces"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002451.png",
+    "correctText": "Edges — face parts — whole faces",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 215,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "According to circuit theory, computing XOR of n bits needs what?",
+    "options": {
+      "A": "The same size network whether deep or shallow",
+      "B": "About O(log n) layers in a deep network, but about 2° units with one hidden layer",
+      "C": "Exactly n hidden units in one layer",
+      "D": "It cannot be computed by neural networks"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002455.png",
+    "correctText": "About O(log n) layers in a deep network, but about 2° units with one hidden layer",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 216,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What is stored in the cache during forward propagation?",
+    "options": {
+      "A": "The final loss only",
+      "B": "The learning rate",
+      "C": "The training labels",
+      "D": "Z^(l) (and W^(l), b^(l)) for use in the backward step"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002459.png",
+    "correctText": "Z^(l) (and W^(l), b^(l)) for use in the backward step",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 217,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What is the initial dA^(L) for backprop with a sigmoid output and cross-entropy loss?",
+    "options": {
+      "A": "−Y/A + (1 − Y)/(1 − A)",
+      "B": "A − Y",
+      "C": "Y/A",
+      "D": "1 − A²"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002502.png",
+    "correctText": "−Y/A + (1 − Y)/(1 − A)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 218,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "Which of the following are parameters (not hyperparameters)?",
+    "options": {
+      "A": "Learning rate a and number of iterations",
+      "B": "Number of hidden layers L",
+      "C": "Weights W and biases b",
+      "D": "Choice of activation function"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002506.png",
+    "correctText": "Weights W and biases b",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 219,
+    "section": "Sequence Models & Neural Network Fundamentals",
+    "question": "What does the course say about the relationship between neural networks and the brain?",
+    "options": {
+      "A": "Neural networks are an exact model of the brain",
+      "B": "The analogy is loose; even neuroscientists do not know whether the brain uses backprop",
+      "C": "The brain is proven to use gradient descent",
+      "D": "Each artificial neuron equals one biological neuron"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002511.png",
+    "correctText": "The analogy is loose; even neuroscientists do not know whether the brain uses backprop",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 221,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "What is the main purpose of the dev set (hold-out / cross-validation set)?",
+    "options": {
+      "A": "Training the model's weights",
+      "B": "Giving the final unbiased estimate of performance",
+      "C": "Comparing and selecting between models",
+      "D": "Storing mislabeled examples"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002518.png",
+    "correctText": "Comparing and selecting between models",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 222,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "With about 1 million examples, which train/dev/test split is typical?",
+    "options": {
+      "A": "98/1/1",
+      "B": "60/20/20",
+      "C": "70/30/0",
+      "D": "33/33/33"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002522.png",
+    "correctText": "98/1/1",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 223,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "Training images come from the web, while dev/test images come from a mobile app. What rule must be followed?",
+    "options": {
+      "A": "Train and test must come from the same distribution",
+      "B": "The dev set must be larger than the training set",
+      "C": "The test set can be skipped",
+      "D": "Dev and test sets must come from the same distribution"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002527.png",
+    "correctText": "Dev and test sets must come from the same distribution",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 224,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "Train error is 1% and dev error is 11% (Bayes error = 0%). What is the diagnosis?",
+    "options": {
+      "A": "High bias",
+      "B": "High variance",
+      "C": "High bias and high variance",
+      "D": "Low bias and low variance"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002530.png",
+    "correctText": "High variance",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 225,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "Train error is 15% and dev error is 16% (Bayes error = 0%). What is the diagnosis?",
+    "options": {
+      "A": "High bias",
+      "B": "High variance",
+      "C": "High bias and high variance",
+      "D": "Low bias and low variance"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002533.png",
+    "correctText": "High bias",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 226,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "Train error is 15% and dev error is 30%. What is the diagnosis?",
+    "options": {
+      "A": "High bias only",
+      "B": "High variance only",
+      "C": "High bias and high variance",
+      "D": "Low bias and low variance"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002536.png",
+    "correctText": "High bias and high variance",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 227,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "According to the basic recipe, what should you try first for high bias?",
+    "options": {
+      "A": "Get more training data",
+      "B": "Add dropout",
+      "C": "Use a smaller network",
+      "D": "Use a bigger network or train longer"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002539.png",
+    "correctText": "Use a bigger network or train longer",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 228,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "According to the basic recipe, what helps with high variance?",
+    "options": {
+      "A": "A bigger network only",
+      "B": "More data or regularization",
+      "C": "Training for fewer iterations only",
+      "D": "Removing the dev set"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002543.png",
+    "correctText": "More data or regularization",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 229,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "Why is L2 regularization also called \"weight decay\"?",
+    "options": {
+      "A": "Weights are deleted after each epoch",
+      "B": "The learning rate decays over time",
+      "C": "Each update multiplies W by (1 - aA/m), shrinking it",
+      "D": "Weights decay to exactly zero"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002548.png",
+    "correctText": "Each update multiplies W by (1 - aA/m), shrinking it",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 230,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "What is a characteristic effect of L1 regularization?",
+    "options": {
+      "A": "It makes weights larger",
+      "B": "It adds noise to activations",
+      "C": "It normalizes the inputs",
+      "D": "It pushes many weights to exactly 0, giving sparse models"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002551.png",
+    "correctText": "It pushes many weights to exactly 0, giving sparse models",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 231,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "How is the regularization parameter A usually chosen?",
+    "options": {
+      "A": "Using the dev set",
+      "B": "Using the test set",
+      "C": "It is always 1",
+      "D": "It equals the learning rate"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002554.png",
+    "correctText": "Using the dev set",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 232,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "In inverted dropout, why is a3 divided by keep_prob?",
+    "options": {
+      "A": "To turn off more units",
+      "B": "To keep the expected value of a3 unchanged",
+      "C": "To speed up backprop",
+      "D": "To make the network deterministic"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002559.png",
+    "correctText": "To keep the expected value of a3 unchanged",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 233,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "How is dropout used at test time?",
+    "options": {
+      "A": "With keep_prob = 0.5",
+      "B": "With a different random mask per example",
+      "C": "Averaged over 100 random masks",
+      "D": "It is not used, because predictions should not be random"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002603.png",
+    "correctText": "It is not used, because predictions should not be random",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 234,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "Which layers should usually get a lower keep_prob?",
+    "options": {
+      "A": "Layers with many parameters that are likely to overfit",
+      "B": "The input layer",
+      "C": "Layers with very few units",
+      "D": "The output layer only"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002607.png",
+    "correctText": "Layers with many parameters that are likely to overfit",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 235,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "What is a downside of dropout during debugging?",
+    "options": {
+      "A": "It doubles the number of parameters",
+      "B": "It only works with sigmoid",
+      "C": "The cost J is no longer well defined, so plotting J to check it decreases is harder",
+      "D": "It prevents the use of mini-batches"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 002611.png",
+    "correctText": "The cost J is no longer well defined, so plotting J to check it decreases is harder",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 236,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "Why is early stopping considered a non-orthogonal technique?",
+    "options": {
+      "A": "It only works on GPUs",
+      "B": "It mixes optimizing J and preventing overfitting into one knob",
+      "C": "It increases the number of hyperparameters to ten",
+      "D": "It needs a separate test set LE]"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003751.png",
+    "correctText": "It mixes optimizing J and preventing overfitting into one knob",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 237,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "How should the test set be normalized?",
+    "options": {
+      "A": "With the same py and o computed on the training set",
+      "B": "With its own p and o",
+      "C": "It should not be normalized",
+      "D": "With p = 0 and o = 1 for every feature by definition"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003754.png",
+    "correctText": "With the same py and o computed on the training set",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 238,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "Why does normalizing inputs speed up training?",
+    "options": {
+      "A": "It reduces the number of features",
+      "B": "It removes the need for a bias",
+      "C": "It turns the network into logistic regression",
+      "D": "It makes the cost function rounder, so gradient descent can use a larger learning rate"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003759.png",
+    "correctText": "It makes the cost function rounder, so gradient descent can use a larger learning rate",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 239,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "In a very deep linear network where every W^(l) ≈ 1.5I, what happens to activations?",
+    "options": {
+      "A": "They stay constant",
+      "B": "They shrink like 0.5^L",
+      "C": "They grow exponentially like 1.5^L",
+      "D": "They become negative"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003805.png",
+    "correctText": "They grow exponentially like 1.5^L",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 240,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "Which variance does He initialization use for W^(l) (ReLU)?",
+    "options": {
+      "A": "1 / n^(l−1)",
+      "B": "2 / n^(l−1)",
+      "C": "2 / (n^(l−1) + n^(l))",
+      "D": "0"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003811.png",
+    "correctText": "2 / n^(l−1)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 241,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "Xavier (Glorot) initialization with variance 1 / n^(l−1) is usually paired with which activation?",
+    "options": {
+      "A": "ReLU",
+      "B": "Softmax",
+      "C": "Linear",
+      "D": "Tanh"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003815.png",
+    "correctText": "Tanh",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 242,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "What is the approximation error of the two-sided difference used for gradient checking?",
+    "options": {
+      "A": "O(ε²)",
+      "B": "O(ε)",
+      "C": "O(1)",
+      "D": "O(1/ε)"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003820.png",
+    "correctText": "O(ε²)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 243,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "With ε = 10⁻⁷, gradient checking gives a difference of about 10⁻³. What does this suggest?",
+    "options": {
+      "A": "The implementation is great",
+      "B": "The result is fine but slightly loose",
+      "C": "There is very likely a bug",
+      "D": "ε is too small"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003825.png",
+    "correctText": "There is very likely a bug",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 244,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "Can gradient checking be used together with dropout?",
+    "options": {
+      "A": "Yes, always",
+      "B": "No; turn dropout off (kKeep_prob = 1) while checking",
+      "C": "Only with keep_prob = 0.5",
+      "D": "Only during training"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003829.png",
+    "correctText": "No; turn dropout off (kKeep_prob = 1) while checking",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 245,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "What characterizes stochastic gradient descent (SGD) compared with mini-batch GD?",
+    "options": {
+      "A": "It updates once per epoch",
+      "B": "It is very smooth",
+      "C": "It uses the whole training set per update",
+      "D": "It updates after each example, is very noisy and loses the speed-up of vectorization"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003834.png",
+    "correctText": "It updates after each example, is very noisy and loses the speed-up of vectorization",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 246,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "With n = 2000 examples, 10 epochs and mini-batch size 4, how many updates does mini-batch GD make?",
+    "options": {
+      "A": "10",
+      "B": "5000",
+      "C": "20000",
+      "D": "500"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003838.png",
+    "correctText": "5000",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 247,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "When should you simply use batch gradient descent?",
+    "options": {
+      "A": "When m is over 1 million",
+      "B": "When using GPUs",
+      "C": "When the training set is small (m < 2000)",
+      "D": "When using Adam"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003842.png",
+    "correctText": "When the training set is small (m < 2000)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 248,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "With B = 0.9, an exponentially weighted average roughly averages over how many recent values?",
+    "options": {
+      "A": "About 10",
+      "B": "About 2",
+      "C": "About 50",
+      "D": "About 1000"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003846.png",
+    "correctText": "About 10",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 249,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "What does bias correction v_t / (1 − β^t) fix in exponentially weighted averages?",
+    "options": {
+      "A": "Values that are too high at the end",
+      "B": "The need for a learning rate",
+      "C": "Exploding gradients",
+      "D": "Estimates that are too low in early steps because v₀ = 0"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003849.png",
+    "correctText": "Estimates that are too low in early steps because v₀ = 0",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 250,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "How does gradient descent with momentum help on an elongated cost surface?",
+    "options": {
+      "A": "Vertical oscillations average out while horizontal progress accumulates",
+      "B": "It increases oscillations to escape minima",
+      "C": "It removes the need for mini-batches",
+      "D": "It normalizes the inputs"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003854.png",
+    "correctText": "Vertical oscillations average out while horizontal progress accumulates",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 251,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "In RMSprop, how is the update for W computed?",
+    "options": {
+      "A": "W := W − α · v_dW",
+      "B": "W := W − α · dW²",
+      "C": "W := W − α · dW / (√S_dW + ε)",
+      "D": "W := (1 − α)W"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003857.png",
+    "correctText": "W := W − α · dW / (√S_dW + ε)",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 252,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "What are the commonly used default values for Adam’s β₁, β₂ and ε?",
+    "options": {
+      "A": "0.5, 0.5, 10⁻³",
+      "B": "0.9, 0.999, 10⁻⁸",
+      "C": "0.999, 0.9, 10⁻⁸",
+      "D": "0.99, 0.99, 1"
+    },
+    "answer": "B",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003901.png",
+    "correctText": "0.9, 0.999, 10⁻⁸",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 253,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "With α₀ = 0.2 and decay_rate = 1, using α = α₀ / (1 + decay_rate × epoch), what is α at epoch 1?",
+    "options": {
+      "A": "0.2",
+      "B": "0.067",
+      "C": "0.05",
+      "D": "0.1"
+    },
+    "answer": "D",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003904.png",
+    "correctText": "0.1",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 254,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "In high-dimensional spaces, most points with zero gradient are what?",
+    "options": {
+      "A": "Bad local optima",
+      "B": "Global minima",
+      "C": "Saddle points",
+      "D": "Plateaus of exactly zero cost"
+    },
+    "answer": "C",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003909.png",
+    "correctText": "Saddle points",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  },
+  {
+    "id": 255,
+    "section": "Improving Deep Neural Networks & ML Strategy",
+    "question": "Which hyperparameter is considered the most important to tune?",
+    "options": {
+      "A": "Learning rate α",
+      "B": "Adam ε",
+      "C": "Number of layers",
+      "D": "Momentum β"
+    },
+    "answer": "A",
+    "sourceImage": "Ảnh chụp màn hình 2026-11-08 003914.png",
+    "correctText": "Learning rate α",
+    "answerSource": "answers.csv — đối chiếu theo tên ảnh"
+  }
+]
