@@ -5,9 +5,53 @@ Bộ ôn tập gồm 252 câu hỏi trắc nghiệm được trích xuất từ 
 
 CÁCH MỞ
 -------
-1. Giải nén file DPL302_Quizlet_Package.zip.
-2. Mở index.html bằng Chrome, Edge hoặc Firefox.
-3. Không cần cài đặt, không cần internet.
+Để dùng tài khoản, database và lịch sử (Python 3.10 trở lên, không cần cài thư viện):
+
+1. Mở terminal trong thư mục dự án.
+2. Chạy `python server.py`.
+3. Mở http://localhost:8000 trên Chrome, Edge hoặc Firefox.
+4. Nhấn “Đăng nhập” → “Đăng ký”, sau đó luyện tập hoặc làm bài kiểm tra.
+5. Chọn “Lịch sử” để xem các lượt làm bài và chi tiết đáp án.
+
+Có thể đổi cổng bằng `python server.py --port 8080`.
+Nếu mở trực tiếp index.html, ứng dụng vẫn hoạt động offline ở chế độ khách;
+database và tài khoản chỉ hoạt động khi truy cập qua server.py.
+
+DATABASE VÀ TÀI KHOẢN
+--------------------
+- SQLite tự tạo tại `data/study.sqlite3` khi chạy server lần đầu.
+- Các bảng: users, sessions, attempts, answers, known_questions.
+- Mỗi tài khoản có tiến độ, lịch sử luyện tập và bài kiểm tra riêng.
+- Mỗi lượt lưu thời gian, điểm số, câu hỏi, các lựa chọn, đáp án đã chọn,
+  đáp án đúng và trạng thái đúng/sai. Câu bỏ trống vẫn được lưu khi nộp bài.
+- Lịch sử giữ bản chụp câu hỏi/đáp án tại thời điểm làm bài để việc sửa
+  ngân hàng câu hỏi sau này không làm thay đổi kết quả cũ.
+- Mật khẩu được băm bằng scrypt với salt riêng; cookie đăng nhập HttpOnly,
+  SameSite=Strict, hết hạn sau 7 ngày. API chỉ cho xem lịch sử của tài khoản hiện tại.
+- Gửi lại cùng lượt làm bài khi kết nối gián đoạn không tạo bản ghi trùng.
+- Tiến độ khách cũ giữ riêng trong localStorage, không tự gán cho tài khoản mới.
+- Lịch sử và tiến độ tài khoản đọc từ database. Ngân hàng câu hỏi đã chỉnh sửa
+  hoặc nhập backup vẫn lưu riêng theo tài khoản trên trình duyệt hiện tại.
+- Nhập backup khi đăng nhập chỉ nhập ngân hàng câu hỏi; không thay thế điểm số
+  hoặc lịch sử trong database. Xuất JSON hiện tại gồm câu hỏi và tổng tiến độ,
+  không phải bản sao đầy đủ lịch sử tài khoản.
+- Chấm điểm theo bản câu hỏi được gửi lên, phù hợp công cụ tự ôn tập có chỉnh sửa
+  đáp án; không dùng kết quả này làm điểm thi chính thức chống gian lận.
+- Khi lưu lỗi, giao diện báo lỗi và cho thử lại; không báo đã lưu thành công.
+
+Để backup toàn bộ tài khoản và lịch sử, dừng server rồi sao chép thư mục `data`.
+Có thể đặt biến môi trường `DPL302_DB` để đổi vị trí database.
+Database và các file tạm SQLite đã được loại khỏi Git.
+Server mặc định chỉ nghe trên máy hiện tại (127.0.0.1). Nếu triển khai cho nhiều
+người truy cập từ xa, cần máy chủ Python có ổ đĩa bền vững, HTTPS, giới hạn đăng
+nhập ở reverse proxy và đặt `DPL302_SECURE_COOKIE=1`; hosting HTML tĩnh không chạy
+được backend này. Nhiều thiết bị dùng chung lịch sử khi kết nối cùng server.
+
+KIỂM THỬ
+--------
+Chạy `python -m unittest -v` để kiểm tra API trên localhost với database tạm:
+đăng ký/đăng nhập/đăng xuất, tách dữ liệu người dùng, lưu đáp án/câu bỏ trống,
+giữ lịch sử, chống ghi trùng, phân trang và chặn truy cập file riêng tư.
 
 TÍNH NĂNG
 ---------
@@ -16,7 +60,7 @@ TÍNH NĂNG
 - Kiểm tra: tạo bài kiểm tra 10/20/50/toàn bộ câu hỏi, xem kết quả sau khi nộp.
 - Ngân hàng câu hỏi: tìm kiếm, lọc theo chương, chỉnh sửa câu hỏi/đáp án.
 - Xuất backup JSON và CSV; nhập lại backup JSON.
-- Tiến độ học được lưu trong localStorage của trình duyệt.
+- Tài khoản: lưu tiến độ, lịch sử và đáp án trong SQLite; khách: lưu tiến độ trong localStorage.
 
 DỮ LIỆU
 -------
@@ -29,4 +73,4 @@ DỮ LIỆU
 LƯU Ý
 -----
 Dữ liệu OCR đã được rà soát các lỗi ký hiệu rõ ràng. Bạn có thể sửa trực tiếp câu hỏi, lựa chọn hoặc đáp án trong mục “Ngân hàng câu hỏi”.
-Tiến độ được lưu trên trình duyệt và thiết bị hiện tại; hãy xuất backup JSON nếu muốn chuyển sang máy khác.
+Đăng nhập qua server.py để dùng lịch sử tài khoản. Với chế độ khách, hãy xuất backup JSON nếu muốn chuyển tiến độ sang máy khác.
