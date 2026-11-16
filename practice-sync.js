@@ -3,8 +3,10 @@
   const copy = value => JSON.parse(JSON.stringify(value));
   function addAnswers(base, payload){
     const next=copy(base);
+    next.questionAttempts={...(next.questionAttempts||{})};
     for(const {question:q,selected} of payload.answers){
       next.attempts++;
+      if(selected!=null)next.questionAttempts[q.id]=(next.questionAttempts[q.id]||0)+1;
       if(selected===q.answer){next.correct++;next.wrong=next.wrong.filter(id=>id!==q.id);}
       else if(!next.wrong.includes(q.id))next.wrong.push(q.id);
     }
@@ -58,9 +60,11 @@
     }
     attach(userId, snapshot){
       return this.update(userId,view=>{
-        if(!view.state)view.state={userId,base:copy(snapshot),directIds:[]};
+        if(!view.state)view.state={userId,base:copy(snapshot),directIds:[],questionCountsReady:!!snapshot.questionAttempts};
         else if(!view.entries.length)view.state.base=mergeSnapshot(view.state.base,snapshot,true);
         else view.state.base.known=copy(snapshot.known);
+        if(!view.entries.length)view.state.questionCountsReady=!!view.state.base.questionAttempts;
+        else if(view.state.questionCountsReady==null)view.state.questionCountsReady=!!view.state.base.questionAttempts;
       });
     }
     enqueue(userId,payload){
@@ -81,12 +85,12 @@
         }
         // While a backlog exists, a server snapshot may already include an
         // unacknowledged retry. Reconcile counters only after the queue drains.
-        if(!view.entries.length)view.state.base=mergeSnapshot(view.state.base,snapshot);
+        if(!view.entries.length){view.state.base=mergeSnapshot(view.state.base,snapshot);view.state.questionCountsReady=!!snapshot.questionAttempts;}
       });
     }
     confirm(userId,snapshot,payload,known=false){
       return this.update(userId,view=>{
-        if(!view.entries.length)view.state.base=mergeSnapshot(view.state.base,snapshot,known);
+        if(!view.entries.length){view.state.base=mergeSnapshot(view.state.base,snapshot,known);view.state.questionCountsReady=!!snapshot.questionAttempts;}
         else{
           if(known)view.state.base.known=copy(snapshot.known);
           if(payload&&!view.state.directIds.includes(payload.eventId))view.state.base=addAnswers(view.state.base,payload);
@@ -133,6 +137,7 @@
       for(const row of s.view.entries)progress=addAnswers(progress,row.payload);
       const blocked=s.view.entries.find(row=>row.blocked);
       this.onChange({userId:s.userId,progress,pending:s.view.entries.length,
+        questionCountsReady:s.storageError?!!progress.questionAttempts:s.view.state.questionCountsReady,
         status:s.storageError?'unavailable':s.paused||s.error||blocked?'error':s.view.entries.length?'syncing':'saved',
         error:s.error||blocked?.blocked||'',authRequired:s.paused});
     }

@@ -95,6 +95,22 @@ CÔNG THỨC TOÁN
 
 ĐỒNG BỘ LUYỆN TẬP
 -----------------
+- Vị trí câu đang xem, chủ đề lọc và đáp án đã chọn trong lượt luyện được lưu
+  trên trình duyệt, riêng cho khách và từng tài khoản. Tắt tab rồi mở lại mục
+  Luyện tập sẽ tiếp tục đúng vị trí; trạng thái này không đồng bộ giữa thiết bị.
+- Có thể chuyển Trước/Tiếp ngay cả khi chưa trả lời, nhập số vị trí để nhảy đến
+  bất kỳ câu nào hoặc mở danh sách câu hỏi để chọn. Danh sách phân biệt đúng/sai
+  của lượt luyện hiện tại; số vị trí khác mã câu hỏi khi dữ liệu có mã bị khuyết.
+- Quay lại câu đã làm giữ nguyên lựa chọn và không thêm lịch sử. Nút “Trả lời lại
+  câu này” mở một lượt trả lời mới. “Luyện lại từ đầu” xóa lựa chọn của lượt hiện
+  tại nhưng giữ tổng lịch sử và bộ đếm tích lũy.
+- Nhãn “Đã trả lời N lần” đếm các lượt chọn đáp án trong cả luyện tập và kiểm tra;
+  câu kiểm tra bỏ trống không tính. Với tài khoản, bộ đếm lấy từ lịch sử database
+  và cộng các lượt trên thiết bị đang chờ đồng bộ, không đếm trùng khi gửi lại.
+  Chế độ khách bắt đầu ghi bộ đếm từng câu từ khi có tính năng này, vì tiến độ
+  khách phiên bản cũ chỉ lưu tổng số lượt, không lưu lịch sử từng câu.
+- API progress bổ sung trường `questionAttempts` dạng `{ "66": 3, "102": 1 }`.
+  Không cần thay đổi schema; các tài khoản hiện có dùng ngay lịch sử đã lưu.
 - Đáp án đã tải sẵn; đúng/sai được hiển thị ngay trên trình duyệt.
 - Với tài khoản đăng nhập, lượt trả lời được ghi vào IndexedDB trước khi mở
   nút chuyển câu; sau đó gửi nền lên API hiện có theo thứ tự.

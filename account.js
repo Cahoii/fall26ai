@@ -19,6 +19,7 @@ const practiceSync = new PracticeSync.PracticeSync({
     if(!account||account.id!==state.userId)return;
     const wasPending=syncState?.pending;
     syncState=state;progress=state.progress;renderSyncStatus();
+    if(currentView==='practice')updatePracticeAttemptCount();
     if(currentView==='dashboard'&&!accountBusy)renderView();
     if(currentView==='history'&&wasPending&&!state.pending&&!historyDetailId)loadHistory();
   }
@@ -87,7 +88,7 @@ function switchAccount(data){
   questions = applyQuestionRevisions(questions.map(q=>({...q,...(overrides[q.id]||{})})));
   sections = [...new Set(questions.map(q=>q.section))];
   study = {pool:[],index:0,flipped:false,filter:'all'};
-  practice = {pool:[],index:0,selected:null,checked:false,filter:'all',complete:false};
+  practice = restorePracticeSession();
   test = {active:false,pool:[],index:0,answers:{},submitted:false};
   historyRequest++;
   historyPage = 1;

@@ -85,8 +85,12 @@ def progress(db, user_id):
     wrong = db.execute("""SELECT a.question_id FROM answers a JOIN attempts t ON t.id=a.attempt_id
         WHERE t.user_id=? AND a.id=(SELECT MAX(b.id) FROM answers b JOIN attempts u ON u.id=b.attempt_id
         WHERE u.user_id=? AND b.question_id=a.question_id) AND a.is_correct=0""", (user_id, user_id)).fetchall()
+    question_counts = db.execute("""SELECT a.question_id, COUNT(*) FROM answers a
+        JOIN attempts t ON t.id=a.attempt_id WHERE t.user_id=? AND a.selected_answer IS NOT NULL
+        GROUP BY a.question_id""", (user_id,)).fetchall()
     return {"known": [r[0] for r in db.execute("SELECT question_id FROM known_questions WHERE user_id=?", (user_id,))],
-            "attempts": counts[0], "correct": counts[1], "wrong": [r[0] for r in wrong]}
+            "attempts": counts[0], "correct": counts[1], "wrong": [r[0] for r in wrong],
+            "questionAttempts": {str(r[0]): r[1] for r in question_counts}}
 
 
 def validate_answers(body):

@@ -112,6 +112,7 @@ class DatabaseFlowTests(unittest.TestCase):
         self.assertEqual(self.request('/api/history', client=other)[1]['total'], 0)
         self.assertEqual(self.request('/api/known', 'PUT', {'known': [1, 2, 2]})[1]['progress']['known'], [1, 2])
         self.assertEqual(self.request('/api/me', client=other)[1]['progress']['known'], [])
+        self.assertEqual(self.request('/api/me', client=other)[1]['progress']['questionAttempts'], {})
 
     def test_validation_and_private_files(self):
         self.register()
@@ -148,6 +149,24 @@ class DatabaseFlowTests(unittest.TestCase):
         second = self.request('/api/history?page=2')[1]
         self.assertEqual((len(first['items']), len(second['items']), first['total']), (20, 2, 22))
         self.assertNotIn(self.question['id'], self.request('/api/me')[1]['progress']['wrong'])
+
+    def test_question_answer_counts_include_history_but_exclude_blank_test_answers_and_retries(self):
+        self.register()
+        self.assertEqual(self.request('/api/me')[1]['progress']['questionAttempts'], {})
+        first = self.payload()
+        self.request('/api/attempts', 'POST', first)
+        repeated = self.request('/api/attempts', 'POST', first)[1]
+        key = str(self.question['id'])
+        self.assertEqual(repeated['progress']['questionAttempts'], {key: 1})
+        exam = self.payload(event='exam-count-event-0001', mode='test')
+        blank = copy.deepcopy(self.question)
+        blank['id'] = 999
+        exam['answers'].append({'question': blank, 'selected': None})
+        result = self.request('/api/attempts', 'POST', exam)[1]
+        self.assertEqual(result['progress']['questionAttempts'], {key: 2})
+        self.request('/api/logout', 'POST', {})
+        login = self.request('/api/login', 'POST', {'username': self.username, 'password': 'testing-12345'})[1]
+        self.assertEqual(login['progress']['questionAttempts'], {key: 2})
 
 
 if __name__ == '__main__':

@@ -114,3 +114,23 @@ test('question snapshots cannot change while queued, and other accounts cannot d
   let sends=0;const other=harness({store,send:async()=>{sends++;}});await other.engine.start(2,base());await tick();
   assert.equal(other.view.pending,0);assert.equal(sends,0);other.engine.stop();
 });
+
+test('per-question counts include queued answers exactly once and skip unanswered test items',async()=>{
+  const gate=deferred();const initial={...base(),attempts:5,correct:5,questionAttempts:{1:5}};
+  const h=harness({send:()=>gate.promise});await h.engine.start(1,initial);await h.engine.enqueue(payload(1));
+  assert.equal(h.view.progress.questionAttempts[1],6);
+  gate.resolve({progress:{...initial,attempts:6,correct:6,questionAttempts:{1:6}}});
+  await until(()=>h.view.pending===0);assert.equal(h.view.progress.questionAttempts[1],6);h.engine.stop();
+  assert.deepEqual(addAnswers({...base(),questionAttempts:{}},payload(2,null)).questionAttempts,{});
+});
+
+test('an older outbox without question counters waits for reconciliation instead of showing incomplete historical totals',async()=>{
+  const store=new IndexedQueue(new IDBFactory());
+  await store.attach(1,base());await store.enqueue(1,payload(1));
+  const gate=deferred(),h=harness({store,send:()=>gate.promise});
+  await h.engine.start(1,{...base(),attempts:8,questionAttempts:{1:8}});
+  assert.equal(h.view.questionCountsReady,false);
+  gate.resolve({progress:{...base(),attempts:9,correct:1,questionAttempts:{1:9}}});
+  await until(()=>h.view.pending===0);
+  assert.equal(h.view.questionCountsReady,true);assert.equal(h.view.progress.questionAttempts[1],9);h.engine.stop();
+});
