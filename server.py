@@ -1,6 +1,5 @@
 """DPL302 local server. Run: python server.py"""
 import argparse
-from contextlib import contextmanager
 import hashlib
 import hmac
 from http.cookies import CookieError, SimpleCookie
@@ -10,30 +9,27 @@ import os
 from pathlib import Path
 import re
 import secrets
-import sqlite3
+import threading
 import time
 from urllib.parse import parse_qs, urlsplit
+from database import connection, DATABASE_ERRORS, INTEGRITY_ERRORS, DatabaseConfigurationError
 
 ROOT = Path(__file__).resolve().parent
 DB_PATH = Path(os.environ.get("DPL302_DB", ROOT / "data" / "study.sqlite3"))
+DATABASE_URL = os.environ.get("DATABASE_URL") or os.environ.get("POSTGRES_URL")
+_database_ready = False
+_database_lock = threading.Lock()
 
 
-@contextmanager
 def connect():
-    db = sqlite3.connect(DB_PATH, timeout=15)
-    db.row_factory = sqlite3.Row
-    db.execute("PRAGMA foreign_keys = ON")
-    try:
-        with db:
-            yield db
-    finally:
-        db.close()
+    return connection(DB_PATH, DATABASE_URL, cloud=os.environ.get('VERCEL') == '1')
 
 
 def init_db():
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    if not DATABASE_URL and os.environ.get('VERCEL') != '1':
+        DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     with connect() as db:
-        db.executescript("""
+        schema = """
             PRAGMA journal_mode = WAL;
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY, username TEXT NOT NULL UNIQUE COLLATE NOCASE,
@@ -58,11 +54,30 @@ def init_db():
                 selected_answer TEXT, correct_answer TEXT NOT NULL, is_correct INTEGER NOT NULL
             );
             CREATE INDEX IF NOT EXISTS answers_attempt ON answers(attempt_id, position);
+            CREATE INDEX IF NOT EXISTS answers_question ON answers(question_id, id DESC);
             CREATE TABLE IF NOT EXISTS known_questions (
                 user_id INTEGER NOT NULL REFERENCES users(id), question_id INTEGER NOT NULL,
                 PRIMARY KEY(user_id, question_id)
             );
-        """)
+        """
+        if DATABASE_URL:
+            # Serializes first-run initialization across concurrent function instances.
+            db.execute('SELECT pg_advisory_xact_lock(3022601)')
+            db.execute('CREATE SCHEMA IF NOT EXISTS dpl302')
+            schema = schema.replace('PRAGMA journal_mode = WAL;', '')
+            schema = schema.replace('INTEGER PRIMARY KEY', 'SERIAL PRIMARY KEY')
+            schema = schema.replace('UNIQUE COLLATE NOCASE', '')
+            schema += 'CREATE UNIQUE INDEX IF NOT EXISTS users_username_lower ON users(lower(username));'
+        db.executescript(schema)
+
+
+def ensure_database():
+    global _database_ready
+    if not _database_ready:
+        with _database_lock:
+            if not _database_ready:
+                init_db()
+                _database_ready = True
 
 
 def progress(db, user_id):
@@ -134,7 +149,7 @@ class Handler(BaseHTTPRequestHandler):
             WHERE s.token_hash=? AND s.expires_at>?""", (hashlib.sha256(token.encode()).hexdigest(), int(time.time()))).fetchone()
 
     def cookie(self, token, age):
-        secure = "; Secure" if os.environ.get("DPL302_SECURE_COOKIE") == "1" else ""
+        secure = "; Secure" if os.environ.get("DPL302_SECURE_COOKIE") == "1" or os.environ.get('VERCEL') == '1' else ""
         return f"session={token}; Path=/; HttpOnly; SameSite=Strict; Max-Age={age}{secure}"
 
     def do_GET(self):
@@ -166,6 +181,7 @@ class Handler(BaseHTTPRequestHandler):
             self.wfile.write(data)
             return
         try:
+            ensure_database()
             if method != "GET":
                 # JSON-only writes and same-origin checks prevent cross-site submissions.
                 origin = self.headers.get("Origin")
@@ -188,11 +204,12 @@ class Handler(BaseHTTPRequestHandler):
                         hashed = hashlib.scrypt(password.encode(), salt=bytes.fromhex(salt), n=16384, r=8, p=1).hex()
                         try:
                             cursor = db.execute("INSERT INTO users(username,salt,password_hash,created_at) VALUES(?,?,?,?)", (username, salt, hashed, int(time.time())))
-                        except sqlite3.IntegrityError:
+                        except INTEGRITY_ERRORS:
+                            db.rollback()
                             return self.reply(409, {"error": "Tên tài khoản đã tồn tại."})
                         user = {"id": cursor.lastrowid, "username": username}
                     else:
-                        record = db.execute("SELECT * FROM users WHERE username=?", (username,)).fetchone()
+                        record = db.execute("SELECT * FROM users WHERE lower(username)=lower(?)", (username,)).fetchone()
                         salt = record["salt"] if record else "00" * 16
                         hashed = hashlib.scrypt(password.encode(), salt=bytes.fromhex(salt), n=16384, r=8, p=1).hex()
                         if not record or not hmac.compare_digest(hashed, record["password_hash"]):
@@ -256,7 +273,10 @@ class Handler(BaseHTTPRequestHandler):
                 return self.reply(404, {"error": "Không tìm thấy API."})
         except (ValueError, TypeError, KeyError):
             self.reply(400, {"error": "Dữ liệu không hợp lệ. Kiểm tra tài khoản, mật khẩu hoặc đáp án."})
-        except sqlite3.Error:
+        except DatabaseConfigurationError as error:
+            self.reply(503, {"error": str(error), "code": "DATABASE_NOT_CONFIGURED"})
+        except DATABASE_ERRORS as error:
+            print(f'Database request failed: {type(error).__name__}', flush=True)
             self.reply(503, {"error": "Chưa thể lưu database. Vui lòng thử lại."})
 
 

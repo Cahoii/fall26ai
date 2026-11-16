@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "python scripts/build_static.py",
+  "outputDirectory": "public",
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 60,
+      "includeFiles": "{server.py,database.py}"
+    }
+  },
+  "rewrites": [
+    {"source": "/api/:path*", "destination": "/api/index?_route=:path*"}
+  ],
+  "headers": [
+    {"source": "/account.js", "headers": [{"key": "Cache-Control", "value": "no-cache"}]}
+  ]
+}

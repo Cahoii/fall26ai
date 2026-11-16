@@ -4,6 +4,7 @@ let accountBusy = false;
 let historyPage = 1;
 let historyRequest = 0;
 let serverAvailable = false;
+let connectionError = '';
 
 async function api(path, method = "GET", body){
   const response = await fetch('/api/' + path, {
@@ -12,6 +13,11 @@ async function api(path, method = "GET", body){
       ...(account ? {'X-Account-ID':String(account.id)} : {})},
     ...(body === undefined ? {} : {body:JSON.stringify(body)})
   });
+  if(!(response.headers.get('Content-Type')||'').includes('application/json')){
+    throw new Error(response.status===404
+      ? 'Website chưa triển khai API tài khoản. Cần deploy backend Vercel mới.'
+      : 'Máy chủ chưa trả về dữ liệu hợp lệ. Vui lòng thử lại.');
+  }
   const data = await response.json();
   if(!response.ok) throw new Error(data.error || 'Không kết nối được máy chủ.');
   return data;
@@ -39,18 +45,21 @@ function switchAccount(data){
 }
 function personalKey(key){ return key + (account ? '-user-' + account.id : ''); }
 async function initializeAccount(){
-  $('#accountBtn').addEventListener('click', openAccount);
+  $('#accountBtn').onclick = openAccount;
   if(location.protocol === 'file:'){ navTo('dashboard'); return; }
   $('#appContent').innerHTML='<div class="empty-state">Đang tải tài khoản…</div>';
   accountBusy = true;
   try{
     const data = await api('me');
     serverAvailable = true;
+    connectionError = '';
     switchAccount(data);
   }catch(error){
+    serverAvailable = false;
+    connectionError = error.message;
     accountBusy = false;
     navTo('dashboard');
-    toast('Chưa kết nối database. Đang dùng chế độ khách trên trình duyệt.');
+    toast(connectionError);
   }finally{ accountBusy = false; }
 }
 document.addEventListener('click',event=>{
@@ -59,8 +68,12 @@ document.addEventListener('click',event=>{
 function openAccount(){
   if(accountBusy){ toast('Đang lưu dữ liệu, vui lòng đợi.'); return; }
   if(!serverAvailable){
-    $('#modalRoot').innerHTML=`<div class="modal-backdrop"><div class="modal"><div class="modal-head"><h3>Kết nối database</h3></div><div class="modal-body"><p>Chạy <code>python server.py</code> trong thư mục dự án, rồi mở <a href="http://localhost:8000">http://localhost:8000</a> để đăng nhập và lưu lịch sử.</p></div><div class="modal-foot"><button class="primary-btn" id="closeAccount">Đóng</button></div></div></div>`;
+    const message=location.protocol==='file:'
+      ? 'Chạy python server.py trong thư mục dự án, rồi mở http://localhost:8000 để dùng tài khoản.'
+      : connectionError||'Chưa kết nối được máy chủ. Vui lòng kiểm tra kết nối và thử lại.';
+    $('#modalRoot').innerHTML=`<div class="modal-backdrop"><div class="modal"><div class="modal-head"><h3>Chưa kết nối được tài khoản</h3></div><div class="modal-body"><p role="alert">${escapeHTML(message)}</p><p class="small-muted">Bạn vẫn có thể học ở chế độ khách; lịch sử tài khoản chỉ được lưu khi kết nối thành công.</p></div><div class="modal-foot"><button class="secondary-btn" id="closeAccount">Đóng</button>${location.protocol!=='file:'?'<button class="primary-btn" id="retryConnection">Thử kết nối lại</button>':''}</div></div></div>`;
     $('#closeAccount').onclick=closeEditor;
+    $('#retryConnection')?.addEventListener('click',()=>{closeEditor();initializeAccount();});
     return;
   }
   if(account){

@@ -19,7 +19,9 @@ database và tài khoản chỉ hoạt động khi truy cập qua server.py.
 
 DATABASE VÀ TÀI KHOẢN
 --------------------
-- SQLite tự tạo tại `data/study.sqlite3` khi chạy server lần đầu.
+- Local: SQLite tự tạo tại `data/study.sqlite3` khi chạy server lần đầu.
+- Vercel: dùng PostgreSQL (Neon), được cấu hình qua biến môi trường server-only
+  `DATABASE_URL` hoặc `POSTGRES_URL`. Không lưu SQLite trên filesystem của Vercel.
 - Các bảng: users, sessions, attempts, answers, known_questions.
 - Mỗi tài khoản có tiến độ, lịch sử luyện tập và bài kiểm tra riêng.
 - Mỗi lượt lưu thời gian, điểm số, câu hỏi, các lựa chọn, đáp án đã chọn,
@@ -27,7 +29,8 @@ DATABASE VÀ TÀI KHOẢN
 - Lịch sử giữ bản chụp câu hỏi/đáp án tại thời điểm làm bài để việc sửa
   ngân hàng câu hỏi sau này không làm thay đổi kết quả cũ.
 - Mật khẩu được băm bằng scrypt với salt riêng; cookie đăng nhập HttpOnly,
-  SameSite=Strict, hết hạn sau 7 ngày. API chỉ cho xem lịch sử của tài khoản hiện tại.
+  SameSite=Strict, hết hạn sau 7 ngày; tự bật Secure trên Vercel.
+  API chỉ cho xem lịch sử của tài khoản hiện tại.
 - Gửi lại cùng lượt làm bài khi kết nối gián đoạn không tạo bản ghi trùng.
 - Tiến độ khách cũ giữ riêng trong localStorage, không tự gán cho tài khoản mới.
 - Lịch sử và tiến độ tài khoản đọc từ database. Ngân hàng câu hỏi đã chỉnh sửa
@@ -42,10 +45,29 @@ DATABASE VÀ TÀI KHOẢN
 Để backup toàn bộ tài khoản và lịch sử, dừng server rồi sao chép thư mục `data`.
 Có thể đặt biến môi trường `DPL302_DB` để đổi vị trí database.
 Database và các file tạm SQLite đã được loại khỏi Git.
-Server mặc định chỉ nghe trên máy hiện tại (127.0.0.1). Nếu triển khai cho nhiều
-người truy cập từ xa, cần máy chủ Python có ổ đĩa bền vững, HTTPS, giới hạn đăng
-nhập ở reverse proxy và đặt `DPL302_SECURE_COOKIE=1`; hosting HTML tĩnh không chạy
-được backend này. Nhiều thiết bị dùng chung lịch sử khi kết nối cùng server.
+Server local mặc định chỉ nghe trên máy hiện tại (127.0.0.1).
+Nhiều thiết bị dùng chung lịch sử khi kết nối cùng server/database.
+
+DEPLOY VERCEL
+-------------
+1. Trong project Vercel, mở Storage → Create Database → Neon → chọn gói phù hợp.
+2. Connect database với môi trường Production. Integration tự cấp `DATABASE_URL`;
+   không đưa URL kết nối hoặc mật khẩu vào HTML, Git hay chat.
+3. Push code lên nhánh deploy (main) hoặc tạo deployment mới.
+4. Vercel cài `requirements.txt`, chạy `python scripts/build_static.py` để chỉ
+   xuất bốn file công khai vào `public`, và deploy `api/index.py` làm Python Function.
+5. Rewrite trong `vercel.json` chuyển `/api/*` đến Function. API tự tạo bảng trong
+   schema `dpl302` khi nhận yêu cầu đầu tiên; kết nối và truy vấn dùng Neon pooler.
+6. Kiểm tra `/api/me`: HTTP 200 với `{"user":null,"progress":null}` khi chưa đăng nhập.
+   Đăng ký tài khoản, trả lời câu hỏi, rồi mở Lịch sử để xác minh dữ liệu.
+
+Nếu `/api/me` trả 404: chưa có Function/rewrite trong deployment; deploy lại code mới.
+Nếu trả 503 với `DATABASE_NOT_CONFIGURED`: kết nối Neon với đúng môi trường rồi redeploy.
+Database giữ dữ liệu qua các lần deploy. SQLite local và Neon là hai database riêng;
+tài khoản đã tạo local không tự chuyển lên Neon.
+Chỉ kết nối database Production với Production; dùng database/branch riêng cho Preview
+nếu cần kiểm thử. Không cho Preview dùng dữ liệu Production khi triển khai rộng rãi.
+Các biến môi trường bí mật, thư mục `data`, `.vercel`, `.venv` và `public` không commit.
 
 KIỂM THỬ
 --------
