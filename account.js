@@ -5,29 +5,81 @@ let historyPage = 1;
 let historyRequest = 0;
 let serverAvailable = false;
 let connectionError = '';
+let accountEpoch = 0;
+let syncState = null;
+let syncReady = Promise.resolve();
+let historyDetailId = null;
+const syncChannel = typeof BroadcastChannel!=='undefined' ? new BroadcastChannel('dpl302-practice-sync') : null;
+const practiceSync = new PracticeSync.PracticeSync({
+  store:new PracticeSync.IndexedQueue(globalThis.indexedDB),
+  locks:globalThis.navigator?.locks,
+  send:(payload,userId,signal)=>api('attempts','POST',payload,{accountId:userId,signal}),
+  notify:userId=>syncChannel?.postMessage({userId}),
+  onChange:state=>{
+    if(!account||account.id!==state.userId)return;
+    const wasPending=syncState?.pending;
+    syncState=state;progress=state.progress;renderSyncStatus();
+    if(currentView==='dashboard'&&!accountBusy)renderView();
+    if(currentView==='history'&&wasPending&&!state.pending&&!historyDetailId)loadHistory();
+  }
+});
+syncChannel?.addEventListener('message',event=>{
+  if(event.data.userId===account?.id)practiceSync.refresh().then(()=>practiceSync.pump());
+});
+globalThis.addEventListener('online',()=>{practiceSync.retry().catch(()=>{});});
+globalThis.addEventListener('focus',()=>{practiceSync.retry().catch(()=>{});});
 
-async function api(path, method = "GET", body){
+function renderSyncStatus(){
+  const root=$('#practiceSyncStatus');
+  if(!root)return;
+  root.hidden=!account;
+  if(!account)return;
+  if(!syncState){root.textContent='Đang tải dữ liệu chờ đồng bộ…';return;}
+  if(practice.persisting){root.textContent='Đang lưu lượt trả lời…';return;}
+  const count=syncState.pending;
+  const text=syncState.status==='saved'?'Đã lưu':syncState.status==='syncing'?`Đang đồng bộ · ${count} lượt còn chờ`:
+    syncState.status==='unavailable'?'Không thể lưu tạm trên thiết bị; lượt mới sẽ được lưu trực tiếp.':`Chưa đồng bộ · ${count} lượt còn chờ. ${syncState.error}`;
+  root.innerHTML=`<span>${escapeHTML(text)}${currentView==='history'&&count?' Các lượt này chưa được xác nhận trong lịch sử.':''}</span>${syncState.authRequired?'<button class="mini-btn" id="syncLogin">Đăng nhập lại</button>':syncState.status==='error'?'<button class="mini-btn" id="syncRetry">Thử lại</button>':''}`;
+  $('#syncLogin')?.addEventListener('click',()=>openAccount(true));
+  $('#syncRetry')?.addEventListener('click',()=>{practiceSync.retry(true).catch(error=>toast(error.message));});
+}
+
+async function api(path, method = "GET", body, options={}){
+  const controller=new AbortController();
+  const abort=()=>controller.abort();
+  options.signal?.addEventListener('abort',abort,{once:true});
+  if(options.signal?.aborted)controller.abort();
+  const timer=setTimeout(abort,15000);
+  const userId=options.accountId??account?.id;
+  try{
   const response = await fetch('/api/' + path, {
     method, credentials: 'same-origin',
+    signal:controller.signal,
     headers: {...(method === 'GET' ? {} : {'Content-Type':'application/json'}),
-      ...(account ? {'X-Account-ID':String(account.id)} : {})},
+      ...(userId!=null ? {'X-Account-ID':String(userId)} : {})},
     ...(body === undefined ? {} : {body:JSON.stringify(body)})
   });
   if(!(response.headers.get('Content-Type')||'').includes('application/json')){
-    throw new Error(response.status===404
+    const error=new Error(response.status===404
       ? 'Website chưa triển khai API tài khoản. Cần deploy backend Vercel mới.'
       : 'Máy chủ chưa trả về dữ liệu hợp lệ. Vui lòng thử lại.');
+    error.status=response.status;throw error;
   }
   const data = await response.json();
-  if(!response.ok) throw new Error(data.error || 'Không kết nối được máy chủ.');
+  if(!response.ok){const error=new Error(data.error||'Không kết nối được máy chủ.');error.status=response.status;throw error;}
   return data;
+  }finally{clearTimeout(timer);options.signal?.removeEventListener('abort',abort);}
 }
 function updateAccountButton(){
   $('#accountBtn').textContent = account ? account.username + ' · Tài khoản' : 'Đăng nhập';
 }
 function switchAccount(data){
+  accountEpoch++;
+  syncState=null;
+  practiceSync.stop();
   account = data.user;
   progress = account ? data.progress : readJSON(STORAGE.progress, {known:[],wrong:[],attempts:0,correct:0});
+  syncReady=practiceSync.start(account?.id,progress);
   // Personal question edits and imported banks must not spill into another account.
   const suffix = account ? '-user-' + account.id : '';
   questions = readJSON(STORAGE.custom + suffix, null) || clone(DEFAULT_QUESTIONS);
@@ -65,7 +117,9 @@ async function initializeAccount(){
 document.addEventListener('click',event=>{
   if(accountBusy){event.preventDefault();event.stopImmediatePropagation();}
 },true);
-function openAccount(){
+function openAccount(forceLogin=false){
+  // DOM click events must not be interpreted as forceLogin=true.
+  forceLogin=forceLogin===true;
   if(accountBusy){ toast('Đang lưu dữ liệu, vui lòng đợi.'); return; }
   if(!serverAvailable){
     const message=location.protocol==='file:'
@@ -76,7 +130,7 @@ function openAccount(){
     $('#retryConnection')?.addEventListener('click',()=>{closeEditor();initializeAccount();});
     return;
   }
-  if(account){
+  if(account&&!forceLogin){
     $('#modalRoot').innerHTML=`<div class="modal-backdrop"><div class="modal"><div class="modal-head"><h3>${escapeHTML(account.username)}</h3></div><div class="modal-body"><p>Lịch sử và đáp án được lưu theo tài khoản này.</p><p class="small-muted">Tiến độ khách trên trình duyệt được giữ riêng.</p><p id="authError" role="alert"></p></div><div class="modal-foot"><button class="secondary-btn" id="closeAccount">Đóng</button><button class="primary-btn" id="logoutBtn">Đăng xuất</button></div></div></div>`;
     $('#closeAccount').onclick=closeEditor;
     $('#logoutBtn').onclick=async()=>{
@@ -105,10 +159,14 @@ function openAccount(){
   $('#username').focus();
 }
 async function saveAttempt(mode, pool, answers, eventId){
-  const result=await api('attempts','POST',{
+  const epoch=accountEpoch;
+  const payload={
     mode,eventId,answers:pool.map(q=>({question:q,selected:answers[q.id]||null}))
-  });
-  progress=result.progress;
+  };
+  const result=await api('attempts','POST',payload);
+  if(epoch!==accountEpoch)throw new Error('Tài khoản đã thay đổi.');
+  await syncReady;
+  await practiceSync.confirm(result.progress,payload);
   return result.answers;
 }
 function newEventId(){
@@ -119,6 +177,7 @@ function renderHistory(){
   return `<div class="page-title">Lịch sử làm bài</div><p class="page-subtitle">${escapeHTML(account.username)} · Luyện tập và kiểm tra đã lưu trong database.</p><div id="historyContent" aria-live="polite">Đang tải…</div>`;
 }
 async function loadHistory(detailId){
+  historyDetailId=detailId||null;
   if(!account){ $('#historyLogin')?.addEventListener('click',openAccount);return; }
   const request=++historyRequest;
   const root=$('#historyContent');

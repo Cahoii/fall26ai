@@ -55,7 +55,7 @@ DEPLOY VERCEL
    không đưa URL kết nối hoặc mật khẩu vào HTML, Git hay chat.
 3. Push code lên nhánh deploy (main) hoặc tạo deployment mới.
 4. Vercel cài `requirements.txt`, chạy `python scripts/build_static.py` để chỉ
-   xuất bốn file công khai vào `public`, và deploy `api/index.py` làm Python Function.
+   xuất năm file công khai vào `public`, và deploy `api/index.py` làm Python Function.
 5. Rewrite trong `vercel.json` chuyển `/api/*` đến Function. API tự tạo bảng trong
    schema `dpl302` khi nhận yêu cầu đầu tiên; kết nối và truy vấn dùng Neon pooler.
 6. Kiểm tra `/api/me`: HTTP 200 với `{"user":null,"progress":null}` khi chưa đăng nhập.
@@ -71,9 +71,27 @@ Các biến môi trường bí mật, thư mục `data`, `.vercel`, `.venv` và 
 
 KIỂM THỬ
 --------
+Chạy `npm ci` rồi `npm test` để kiểm tra hàng đợi IndexedDB và phản hồi luyện tập
+với API chậm 2 giây, gửi lại sau lỗi mạng, nhiều tab và đổi tài khoản.
 Chạy `python -m unittest -v` để kiểm tra API trên localhost với database tạm:
 đăng ký/đăng nhập/đăng xuất, tách dữ liệu người dùng, lưu đáp án/câu bỏ trống,
 giữ lịch sử, chống ghi trùng, phân trang và chặn truy cập file riêng tư.
+
+ĐỒNG BỘ LUYỆN TẬP
+-----------------
+- Đáp án đã tải sẵn; đúng/sai được hiển thị ngay trên trình duyệt.
+- Với tài khoản đăng nhập, lượt trả lời được ghi vào IndexedDB trước khi mở
+  nút chuyển câu; sau đó gửi nền lên API hiện có theo thứ tự.
+- “Đang đồng bộ” và “Chưa đồng bộ” hiển thị số lượt còn chờ. Chỉ hiển thị
+  “Đã lưu” khi server xác nhận và hàng đợi đã được xóa thành công trên thiết bị.
+- Tự thử lại khi lỗi mạng, khi kết nối trở lại hoặc mở lại ứng dụng. Hàng đợi
+  giữ nguyên eventId để server không tạo lịch sử trùng sau một lần gửi lỗi.
+- Hàng đợi tách theo tài khoản, không lưu mật khẩu hoặc cookie. Đăng xuất giữ
+  lượt chưa gửi; chỉ đồng bộ tiếp khi tài khoản đó đăng nhập lại.
+- Web Locks phối hợp gửi giữa các tab; khi không có Web Locks, API vẫn chống
+  ghi trùng. IndexedDB không dùng được thì lưu trực tiếp và chờ server xác nhận.
+- Lượt chưa đồng bộ chỉ tồn tại trên thiết bị hiện tại. Xóa dữ liệu trình duyệt
+  sẽ xóa các lượt chưa gửi; lịch sử đã lên Neon vẫn được giữ.
 
 TÍNH NĂNG
 ---------

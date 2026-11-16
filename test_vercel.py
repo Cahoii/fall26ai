@@ -36,7 +36,7 @@ class VercelDeploymentTests(unittest.TestCase):
     def test_only_public_assets_are_published(self):
         from scripts import build_static
         self.assertEqual({p.name for p in build_static.OUTPUT.iterdir()},
-                         {'index.html', 'account.js', 'questions.json', 'questions.csv'})
+                         {'index.html', 'account.js', 'practice-sync.js', 'questions.json', 'questions.csv'})
         config = json.loads((server.ROOT / 'vercel.json').read_text())
         self.assertEqual(config['outputDirectory'], 'public')
         self.assertEqual(config['rewrites'][0]['destination'], '/api/index?_route=:path*')

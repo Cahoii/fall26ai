@@ -168,6 +168,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self.reply(405, {"error": "Phương thức không được hỗ trợ."})
             # Explicit public files only: never expose database, source or backups.
             name = {"/": "index.html", "/index.html": "index.html", "/account.js": "account.js",
+                    "/practice-sync.js": "practice-sync.js",
                     "/questions.json": "questions.json", "/questions.csv": "questions.csv"}.get(url.path)
             if not name:
                 return self.reply(404, {"error": "Không tìm thấy."})

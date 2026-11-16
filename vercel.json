@@ -12,6 +12,7 @@
     {"source": "/api/:path*", "destination": "/api/index?_route=:path*"}
   ],
   "headers": [
+    {"source": "/practice-sync.js", "headers": [{"key": "Cache-Control", "value": "no-cache"}]},
     {"source": "/account.js", "headers": [{"key": "Cache-Control", "value": "no-cache"}]}
   ]
 }
