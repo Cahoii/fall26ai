@@ -979,14 +979,14 @@
     "section": "RNN, NLP & Attention",
     "question": "What is the softmax loss for one example?",
     "options": {
-      "A": "(¥ - yf",
-      "B": "-2; yj log yj",
-      "C": "max(0, 1 - yy)",
-      "D": "-log(1 - y)"
+      "A": "\\((\\hat{y}-y)^2\\)",
+      "B": "\\(-\\sum_j y_j\\log\\hat{y}_j\\)",
+      "C": "\\(\\max(0,\\,1-y\\hat{y})\\)",
+      "D": "\\(-\\log(1-\\hat{y})\\)"
     },
     "answer": "B",
     "sourceImage": "Ảnh chụp màn hình 2026-11-08 000303.png",
-    "correctText": "-2; yj log yj",
+    "correctText": "\\(-\\sum_j y_j\\log\\hat{y}_j\\)",
     "answerSource": "answers.csv — đối chiếu theo tên ảnh"
   },
   {
@@ -1502,16 +1502,16 @@
   {
     "id": 102,
     "section": "Convolutional Neural Networks",
-    "question": "What is the total weight shape of convolution layer l?",
+    "question": "What is the total weight shape of convolution layer \\(l\\)?",
     "options": {
-      "A": "f^(l) × f^(l) × n_c^(l−1) × n_c^(l)",
-      "B": "n_H^(l) × n_W^(l) × n_c^(l)",
-      "C": "f^(l) × f^(l)",
-      "D": "1 × 1 × 1 × n_c^(l)"
+      "A": "\\(f^{(l)}\\times f^{(l)}\\times n_c^{(l-1)}\\times n_c^{(l)}\\)",
+      "B": "\\(n_H^{(l)}\\times n_W^{(l)}\\times n_c^{(l)}\\)",
+      "C": "\\(f^{(l)}\\times f^{(l)}\\)",
+      "D": "\\(1\\times1\\times1\\times n_c^{(l)}\\)"
     },
     "answer": "A",
     "sourceImage": "Ảnh chụp màn hình 2026-11-08 000648.png",
-    "correctText": "f^(l) × f^(l) × n_c^(l−1) × n_c^(l)",
+    "correctText": "\\(f^{(l)}\\times f^{(l)}\\times n_c^{(l-1)}\\times n_c^{(l)}\\)",
     "answerSource": "answers.csv — đối chiếu theo tên ảnh"
   },
   {
@@ -1667,16 +1667,16 @@
   {
     "id": 113,
     "section": "Convolutional Neural Networks",
-    "question": "In a residual block, how is a^[l+2] computed?",
+    "question": "In a residual block, how is \\(a^{(l+2)}\\) computed?",
     "options": {
-      "A": "a^[l+2] = g(z^[l+2])",
-      "B": "a^[l+2] = a^[l]",
-      "C": "a^[l+2] = g(z^[l+2] + a^[l])",
-      "D": "a^[l+2] = z^[l+2] − a^[l]"
+      "A": "\\(a^{(l+2)}=g\\left(z^{(l+2)}\\right)\\)",
+      "B": "\\(a^{(l+2)}=a^{(l)}\\)",
+      "C": "\\(a^{(l+2)}=g\\left(z^{(l+2)}+a^{(l)}\\right)\\)",
+      "D": "\\(a^{(l+2)}=z^{(l+2)}-a^{(l)}\\)"
     },
     "answer": "C",
     "sourceImage": "Ảnh chụp màn hình 2026-11-08 000729.png",
-    "correctText": "a^[l+2] = g(z^[l+2] + a^[l])",
+    "correctText": "\\(a^{(l+2)}=g\\left(z^{(l+2)}+a^{(l)}\\right)\\)",
     "answerSource": "answers.csv — đối chiếu theo tên ảnh"
   },
   {
@@ -1697,16 +1697,16 @@
   {
     "id": 115,
     "section": "Convolutional Neural Networks",
-    "question": "In ResNet, what is done if z^[l+2] and a^[l] have different dimensions?",
+    "question": "In ResNet, what is done if \\(z^{(l+2)}\\) and \\(a^{(l)}\\) have different dimensions?",
     "options": {
       "A": "The skip connection is removed",
-      "B": "Max pooling is applied to z",
+      "B": "Max pooling is applied to \\(z\\)",
       "C": "The block is skipped",
-      "D": "a^[l] is multiplied by a matrix W_s"
+      "D": "\\(a^{(l)}\\) is multiplied by a matrix \\(W_s\\)"
     },
     "answer": "D",
     "sourceImage": "Ảnh chụp màn hình 2026-11-08 000738.png",
-    "correctText": "a^[l] is multiplied by a matrix W_s",
+    "correctText": "\\(a^{(l)}\\) is multiplied by a matrix \\(W_s\\)",
     "answerSource": "answers.csv — đối chiếu theo tên ảnh"
   },
   {
@@ -1892,16 +1892,16 @@
   {
     "id": 128,
     "section": "Convolutional Neural Networks",
-    "question": "What is the target label y when there is no object in the image?",
+    "question": "What is the target label \\(y\\) when there is no object in the image?",
     "options": {
       "A": "All zeros",
-      "B": "[1, ?, ?, ?, ?, ?, ?, ?]",
-      "C": "[0, 0, 0, 0, 0, 1, 0, 0]",
-      "D": "[0, ?, ?, ?, ?, ?, ?, ?], where \"2\" means don't care"
+      "B": "\\([1,\\,?,\\,?,\\,?,\\,?,\\,?,\\,?,\\,?]\\)",
+      "C": "\\([0,\\,0,\\,0,\\,0,\\,0,\\,1,\\,0,\\,0]\\)",
+      "D": "\\([0,\\,?,\\,?,\\,?,\\,?,\\,?,\\,?,\\,?]\\), where \"?\" means don't care"
     },
     "answer": "D",
     "sourceImage": "Ảnh chụp màn hình 2026-11-08 000837.png",
-    "correctText": "[0, ?, ?, ?, ?, ?, ?, ?], where \"2\" means don't care",
+    "correctText": "\\([0,\\,?,\\,?,\\,?,\\,?,\\,?,\\,?,\\,?]\\), where \"?\" means don't care",
     "answerSource": "answers.csv — đối chiếu theo tên ảnh"
   },
   {

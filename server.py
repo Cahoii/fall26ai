@@ -169,12 +169,15 @@ class Handler(BaseHTTPRequestHandler):
             # Explicit public files only: never expose database, source or backups.
             name = {"/": "index.html", "/index.html": "index.html", "/account.js": "account.js",
                     "/practice-sync.js": "practice-sync.js",
+                    "/math-format.js": "math-format.js", "/question-revisions.js": "question-revisions.js",
                     "/questions.json": "questions.json", "/questions.csv": "questions.csv"}.get(url.path)
-            if not name:
+            if re.fullmatch(r'/vendor/katex/(?:katex\.min\.(?:css|js)|fonts/KaTeX_[A-Za-z0-9-]+\.woff2)', url.path):
+                name = url.path.lstrip('/')
+            if not name or not (ROOT / name).is_file():
                 return self.reply(404, {"error": "Không tìm thấy."})
             data = (ROOT / name).read_bytes()
             self.send_response(200)
-            self.send_header("Content-Type", {".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".json": "application/json", ".csv": "text/csv; charset=utf-8"}[Path(name).suffix])
+            self.send_header("Content-Type", {".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".woff2": "font/woff2", ".json": "application/json", ".csv": "text/csv; charset=utf-8"}[Path(name).suffix])
             self.send_header("Content-Length", str(len(data)))
             self.send_header("Cache-Control", "no-cache")
             self.send_header("X-Content-Type-Options", "nosniff")

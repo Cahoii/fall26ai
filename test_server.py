@@ -124,6 +124,17 @@ class DatabaseFlowTests(unittest.TestCase):
         for path in ('/data/study.sqlite3', '/server.py', '/.git/config', '/../server.py'):
             self.assertEqual(self.request(path)[0], 404)
 
+    def test_math_assets_are_public_but_vendor_paths_are_restricted(self):
+        for path, kind in [('/math-format.js', 'text/javascript'),
+                           ('/question-revisions.js', 'text/javascript'),
+                           ('/vendor/katex/katex.min.js', 'text/javascript'),
+                           ('/vendor/katex/katex.min.css', 'text/css'),
+                           ('/vendor/katex/fonts/KaTeX_Main-Regular.woff2', 'font/woff2')]:
+            with self.client.open(self.base + path) as response:
+                self.assertEqual(response.status, 200)
+                self.assertIn(kind, response.headers['Content-Type'])
+        self.assertEqual(self.request('/vendor/katex/../../server.py')[0], 404)
+
     def test_history_pagination_and_latest_answer(self):
         self.register()
         payload = self.payload()

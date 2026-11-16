@@ -11,6 +11,9 @@ async function setup(indexedDB=new IDBFactory()){
   const w=dom.window;
   w.eval=code=>vm.runInContext(code,dom.getInternalVMContext());
   Object.defineProperty(w,'indexedDB',{value:indexedDB});
+  w.katex=require('katex');
+  w.eval(fs.readFileSync('math-format.js','utf8'));
+  w.eval(fs.readFileSync('question-revisions.js','utf8'));
   w.eval(fs.readFileSync('practice-sync.js','utf8'));
   w.eval(fs.readFileSync('account.js','utf8'));
   w.eval(html.match(/<script>([\s\S]*?)<\/script>/)[1].replace('initializeAccount();',''));
@@ -21,6 +24,7 @@ async function setup(indexedDB=new IDBFactory()){
 test('actual practice UI displays feedback under 100ms with a 2-second API delay and ignores double-clicks',async t=>{
   const {dom,w}=await setup();t.after(()=>{w.eval('practiceSync.stop()');dom.window.close();});
   let responses=0;
+  w.eval("practice.pool=[questions.find(q=>q.id===66),questions.find(q=>q.id===102)];practice.index=0;renderView()");
   w.fetch=async()=>{await new Promise(r=>setTimeout(r,2000));responses++;return {ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>({progress:{known:[],wrong:[],attempts:1,correct:1},answers:{1:'B'}})};};
   const start=performance.now();
   const done=w.eval("selectPractice('B')");

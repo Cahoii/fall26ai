@@ -84,7 +84,7 @@ function switchAccount(data){
   const suffix = account ? '-user-' + account.id : '';
   questions = readJSON(STORAGE.custom + suffix, null) || clone(DEFAULT_QUESTIONS);
   overrides = readJSON(STORAGE.overrides + suffix, {});
-  questions = questions.map(q=>({...q,...(overrides[q.id]||{})}));
+  questions = applyQuestionRevisions(questions.map(q=>({...q,...(overrides[q.id]||{})})));
   sections = [...new Set(questions.map(q=>q.section))];
   study = {pool:[],index:0,flipped:false,filter:'all'};
   practice = {pool:[],index:0,selected:null,checked:false,filter:'all',complete:false};
@@ -187,7 +187,7 @@ async function loadHistory(detailId){
     if(request!==historyRequest||currentView!=='history')return;
     if(detailId){
       const a=data.attempt;
-      root.innerHTML=`<button class="secondary-btn" id="historyBack">← Danh sách</button><h2>${a.mode==='test'?'Kiểm tra':'Luyện tập'} · ${a.correct}/${a.total} câu đúng</h2><p class="small-muted">${formatTime(a.created_at)}</p><div class="result-list">${data.answers.map(r=>`<div class="result-item"><strong>Câu ${r.question_id} · ${escapeHTML(r.section)} · ${r.is_correct?'Đúng':'Sai'}</strong><p>${escapeHTML(r.question)}</p>${Object.entries(r.options).map(([k,v])=>`<p>${escapeHTML(k)}. ${escapeHTML(v)}</p>`).join('')}<p>Bạn chọn: <b>${r.selected_answer?escapeHTML(r.selected_answer)+'. '+escapeHTML(r.options[r.selected_answer]):'Chưa trả lời'}</b></p><p>Đáp án đúng: <b>${escapeHTML(r.correct_answer)}. ${escapeHTML(r.options[r.correct_answer])}</b></p></div>`).join('')}</div>`;
+      root.innerHTML=`<button class="secondary-btn" id="historyBack">← Danh sách</button><h2>${a.mode==='test'?'Kiểm tra':'Luyện tập'} · ${a.correct}/${a.total} câu đúng</h2><p class="small-muted">${formatTime(a.created_at)}</p><div class="result-list">${data.answers.map(r=>`<div class="result-item"><strong>Câu ${r.question_id} · ${escapeHTML(r.section)} · ${r.is_correct?'Đúng':'Sai'}</strong><p>${formatContent(r.question)}</p>${Object.entries(r.options).map(([k,v])=>`<p>${escapeHTML(k)}. ${formatContent(v)}</p>`).join('')}<p>Bạn chọn: <b>${r.selected_answer?escapeHTML(r.selected_answer)+'. '+formatContent(r.options[r.selected_answer]):'Chưa trả lời'}</b></p><p>Đáp án đúng: <b>${escapeHTML(r.correct_answer)}. ${formatContent(r.options[r.correct_answer])}</b></p></div>`).join('')}</div>`;
       $('#historyBack').onclick=()=>loadHistory();
     }else{
       root.innerHTML=data.items.length?`<div class="result-list">${data.items.map(a=>`<div class="result-item"><strong>${a.mode==='test'?'Kiểm tra':'Luyện tập'} · ${a.correct}/${a.total} câu đúng (${Math.round(a.correct/a.total*100)}%)</strong><p class="small-muted">${formatTime(a.created_at)}</p><button class="secondary-btn" data-attempt="${a.id}">Xem câu hỏi và đáp án</button></div>`).join('')}</div><div class="pagination"><button class="mini-btn" id="historyPrev" ${historyPage===1?'disabled':''}>← Trước</button><span>Trang ${historyPage} / ${Math.max(1,Math.ceil(data.total/20))}</span><button class="mini-btn" id="historyNext" ${historyPage*20>=data.total?'disabled':''}>Tiếp →</button></div>`:'<div class="empty-state"><strong>Chưa có lịch sử</strong>Hãy trả lời câu luyện tập hoặc nộp một bài kiểm tra.</div>';

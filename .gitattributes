@@ -1,0 +1,2 @@
+# CSV keeps its existing Windows line endings and UTF-8 BOM for Excel.
+questions.csv whitespace=cr-at-eol

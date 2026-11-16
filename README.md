@@ -55,7 +55,8 @@ DEPLOY VERCEL
    không đưa URL kết nối hoặc mật khẩu vào HTML, Git hay chat.
 3. Push code lên nhánh deploy (main) hoặc tạo deployment mới.
 4. Vercel cài `requirements.txt`, chạy `python scripts/build_static.py` để chỉ
-   xuất năm file công khai vào `public`, và deploy `api/index.py` làm Python Function.
+   xuất các file công khai và thư viện KaTeX vào `public`, và deploy `api/index.py`
+   làm Python Function.
 5. Rewrite trong `vercel.json` chuyển `/api/*` đến Function. API tự tạo bảng trong
    schema `dpl302` khi nhận yêu cầu đầu tiên; kết nối và truy vấn dùng Neon pooler.
 6. Kiểm tra `/api/me`: HTTP 200 với `{"user":null,"progress":null}` khi chưa đăng nhập.
@@ -76,6 +77,21 @@ với API chậm 2 giây, gửi lại sau lỗi mạng, nhiều tab và đổi t
 Chạy `python -m unittest -v` để kiểm tra API trên localhost với database tạm:
 đăng ký/đăng nhập/đăng xuất, tách dữ liệu người dùng, lưu đáp án/câu bỏ trống,
 giữ lịch sử, chống ghi trùng, phân trang và chặn truy cập file riêng tư.
+
+CÔNG THỨC TOÁN
+--------------
+- Hỗ trợ LaTeX: đặt công thức nội dòng trong `\( ... \)` và công thức riêng dòng
+  trong `\[ ... \]`. Ví dụ: `\(\hat{y}_j\)`, `\(a^{(l+2)}\)` và `\(W_s\)`.
+- KaTeX 0.19.1 và font WOFF2 được đóng gói trong `vendor/katex`, không gọi CDN;
+  mở file local vẫn hiển thị công thức khi không có mạng.
+- Dữ liệu JSON/CSV, backup và ô chỉnh sửa giữ mã LaTeX; giao diện học, kết quả,
+  ngân hàng câu hỏi và lịch sử hiển thị ký hiệu toán học.
+- Các câu 66, 102, 113, 115, 128 được đối chiếu lại với ảnh gốc; xem bản duyệt
+  tại `reviews/math-corrections.md`. Ảnh 4 và ảnh 6 là cùng câu 115.
+- Bộ câu hỏi cũ trên trình duyệt được sửa có chọn lọc theo nội dung gốc; giữ
+  nội dung tự chỉnh sửa và giữ nguyên bản chụp của lịch sử đã lưu trên database.
+- Khi nâng phiên bản KaTeX, cập nhật dependency rồi chạy `npm run vendor:math`
+  và commit các asset đã tạo cùng license. Thư viện chạy với `trust: false`.
 
 ĐỒNG BỘ LUYỆN TẬP
 -----------------

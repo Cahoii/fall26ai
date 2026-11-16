@@ -1,6 +1,7 @@
 """Checks for the Vercel entrypoint and deployment configuration."""
 from http.cookiejar import CookieJar
 from http.server import ThreadingHTTPServer
+import csv
 import json
 import os
 from pathlib import Path
@@ -17,6 +18,19 @@ import server
 
 
 class VercelDeploymentTests(unittest.TestCase):
+    def test_question_json_and_csv_are_consistent(self):
+        questions = json.loads((server.ROOT / 'questions.json').read_text(encoding='utf-8'))
+        with (server.ROOT / 'questions.csv').open(encoding='utf-8-sig', newline='') as handle:
+            rows = {int(row['id']): row for row in csv.DictReader(handle)}
+        self.assertEqual(len(rows), len(questions))
+        for question in questions:
+            row = rows[question['id']]
+            self.assertEqual(row['question'], question['question'])
+            self.assertEqual(row['answer'], question['answer'])
+            self.assertEqual(row['correct_text'], question['correctText'])
+            for key in 'ABCD':
+                self.assertEqual(row['option_' + key], question['options'][key])
+
     def test_cloud_requires_persistent_database(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'must-not-be-created.sqlite3'
@@ -36,7 +50,7 @@ class VercelDeploymentTests(unittest.TestCase):
     def test_only_public_assets_are_published(self):
         from scripts import build_static
         self.assertEqual({p.name for p in build_static.OUTPUT.iterdir()},
-                         {'index.html', 'account.js', 'practice-sync.js', 'questions.json', 'questions.csv'})
+                         {'index.html', 'account.js', 'practice-sync.js', 'math-format.js', 'question-revisions.js', 'questions.json', 'questions.csv', 'vendor'})
         config = json.loads((server.ROOT / 'vercel.json').read_text())
         self.assertEqual(config['outputDirectory'], 'public')
         self.assertEqual(config['rewrites'][0]['destination'], '/api/index?_route=:path*')
