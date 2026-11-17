@@ -1,6 +1,19 @@
 /* Durable, per-account practice outbox. No credentials are stored in IndexedDB. */
 (function(root){
+  const learning=root.Learning||(typeof require==='function'?require('./learning.js'):null);
   const copy = value => JSON.parse(JSON.stringify(value));
+  function trackMastery(view,payload){
+    const item=learning.event(payload);if(!item)return;
+    view.state.masteryBase=view.state.masteryBase||copy(view.state.base.mastery||{});
+    view.state.masteryTimeline=view.state.masteryTimeline||[];
+    if(!view.state.masteryTimeline.some(row=>row.eventId===item.eventId))view.state.masteryTimeline.push(item);
+  }
+  function settleMastery(view,snapshot){
+    const projected=learning.replay(view.state.masteryBase||view.state.base.mastery||{},view.state.masteryTimeline||[]);
+    const fresh=snapshot.mastery&&snapshot.attempts>=view.state.base.attempts;
+    view.state.base.mastery=copy(fresh?snapshot.mastery:projected);
+    view.state.masteryBase=copy(view.state.base.mastery);view.state.masteryTimeline=[];
+  }
   function addAnswers(base, payload){
     const next=copy(base);
     next.questionAttempts={...(next.questionAttempts||{})};
@@ -15,6 +28,7 @@
   function mergeSnapshot(base, snapshot, known=false){
     const result=snapshot.attempts>=base.attempts?copy(snapshot):copy(base);
     result.known=copy(known?snapshot.known:base.known);
+    result.mastery=copy(snapshot.mastery&&snapshot.attempts>=base.attempts?snapshot.mastery:(base.mastery||{}));
     return result;
   }
   class IndexedQueue {
@@ -65,6 +79,11 @@
         else view.state.base.known=copy(snapshot.known);
         if(!view.entries.length)view.state.questionCountsReady=!!view.state.base.questionAttempts;
         else if(view.state.questionCountsReady==null)view.state.questionCountsReady=!!view.state.base.questionAttempts;
+        if(!view.entries.length){view.state.masteryBase=copy(view.state.base.mastery||{});view.state.masteryTimeline=[];}
+        else if(!view.state.masteryBase){
+          view.state.masteryBase=copy(snapshot.mastery||{});view.state.masteryTimeline=[];
+          for(const row of view.entries)trackMastery(view,row.payload);
+        }
       });
     }
     enqueue(userId,payload){
@@ -73,6 +92,7 @@
         const request=store.add(row);
         request.onsuccess=()=>{row.id=request.result;};
         view.entries.push(row);
+        trackMastery(view,payload);
       });
     }
     acknowledge(userId,eventId,snapshot){
@@ -85,17 +105,19 @@
         }
         // While a backlog exists, a server snapshot may already include an
         // unacknowledged retry. Reconcile counters only after the queue drains.
-        if(!view.entries.length){view.state.base=mergeSnapshot(view.state.base,snapshot);view.state.questionCountsReady=!!snapshot.questionAttempts;}
+        if(!view.entries.length){settleMastery(view,snapshot);view.state.base=mergeSnapshot(view.state.base,snapshot);view.state.questionCountsReady=!!snapshot.questionAttempts;}
       });
     }
     confirm(userId,snapshot,payload,known=false){
       return this.update(userId,view=>{
+        if(payload)trackMastery(view,payload);
         if(!view.entries.length){view.state.base=mergeSnapshot(view.state.base,snapshot,known);view.state.questionCountsReady=!!snapshot.questionAttempts;}
         else{
           if(known)view.state.base.known=copy(snapshot.known);
           if(payload&&!view.state.directIds.includes(payload.eventId))view.state.base=addAnswers(view.state.base,payload);
         }
         if(payload)view.state.directIds=[...new Set([...view.state.directIds,payload.eventId])].slice(-1000);
+        if(!view.entries.length)settleMastery(view,snapshot);
       });
     }
     block(userId,eventId,message){
@@ -135,6 +157,7 @@
       if(!s.view)return;
       let progress=copy(s.view.state.base);
       for(const row of s.view.entries)progress=addAnswers(progress,row.payload);
+      progress.mastery=learning.replay(s.view.state.masteryBase||progress.mastery||{},s.view.state.masteryTimeline||[]);
       const blocked=s.view.entries.find(row=>row.blocked);
       this.onChange({userId:s.userId,progress,pending:s.view.entries.length,
         questionCountsReady:s.storageError?!!progress.questionAttempts:s.view.state.questionCountsReady,
@@ -162,6 +185,7 @@
         if(!s.view.entries.length)s.view.state.base=mergeSnapshot(s.view.state.base,snapshot,known);
         else if(payload&&!s.view.state.directIds.includes(payload.eventId)){
           s.view.state.base=addAnswers(s.view.state.base,payload);s.view.state.directIds.push(payload.eventId);
+          trackMastery(s.view,payload);
         }
         s.error='Đã lưu lượt này trên máy chủ; chưa cập nhật được dữ liệu tạm.';this.publish(s);
       }

@@ -134,3 +134,15 @@ test('an older outbox without question counters waits for reconciliation instead
   await until(()=>h.view.pending===0);
   assert.equal(h.view.questionCountsReady,true);assert.equal(h.view.progress.questionAttempts[1],9);h.engine.stop();
 });
+
+test('mastery timeline preserves performed order when a foreground exam finishes before an offline practice answer',async()=>{
+  const gate=deferred(),initial={...base(),mastery:{1:1}},h=harness({send:()=>gate.promise});
+  await h.engine.start(1,initial);
+  const practice={...payload(1),learningSessionId:'practice-session-001',answeredAt:100,masteryEligible:{1:true}};
+  await h.engine.enqueue(practice);assert.equal(h.view.progress.mastery[1],2);
+  const exam={...payload(1,'B'),eventId:'foreground-test-000001',mode:'test',learningSessionId:'test-session-000001',answeredAt:200};
+  await h.engine.confirm({...base(),attempts:1,mastery:{1:0}},exam);
+  assert.equal(h.view.progress.mastery[1],0);
+  gate.resolve({progress:{...base(),attempts:2,correct:1,mastery:{1:0}}});await until(()=>h.view.pending===0);
+  assert.equal(h.view.progress.mastery[1],0);h.engine.stop();
+});

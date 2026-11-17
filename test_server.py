@@ -168,6 +168,46 @@ class DatabaseFlowTests(unittest.TestCase):
         login = self.request('/api/login', 'POST', {'username': self.username, 'password': 'testing-12345'})[1]
         self.assertEqual(login['progress']['questionAttempts'], {key: 2})
 
+    def test_mastery_uses_legacy_history_and_server_session_checks_not_client_flags(self):
+        self.register()
+        key = str(self.question['id'])
+        self.request('/api/attempts', 'POST', self.payload())  # Legacy history seeds level one.
+        self.assertEqual(self.request('/api/me')[1]['progress']['mastery'][key], 1)
+        def modern(number, session, correct=True, blank=False):
+            body = self.payload(event=f'mastery-event-{number:05d}')
+            body.update(learningSessionId=session, answeredAt=10000+number, masteryEligible={key: True})
+            if not correct:
+                body['answers'][0]['selected'] = None if blank else next(k for k in self.question['options'] if k != self.question['answer'])
+            return body
+        session = 'practice-session-00001'
+        self.assertEqual(self.request('/api/attempts', 'POST', modern(1, session))[1]['progress']['mastery'][key], 2)
+        self.assertEqual(self.request('/api/attempts', 'POST', modern(2, session))[1]['progress']['mastery'][key], 2)
+        self.assertEqual(self.request('/api/attempts', 'POST', modern(3, session, False))[1]['progress']['mastery'][key], 0)
+        self.assertEqual(self.request('/api/attempts', 'POST', modern(4, session))[1]['progress']['mastery'][key], 0)
+        new = modern(5, 'test-session-00000001')
+        self.assertEqual(self.request('/api/attempts', 'POST', new)[1]['progress']['mastery'][key], 1)
+        self.assertEqual(self.request('/api/attempts', 'POST', new)[1]['progress']['mastery'][key], 1)
+        self.assertEqual(self.request('/api/attempts', 'POST', modern(6, 'test-session-00000002', False, True))[1]['progress']['mastery'][key], 0)
+
+    def test_mastery_orders_late_delivered_answers_by_performed_time(self):
+        self.register()
+        self.request('/api/attempts', 'POST', self.payload())
+        later = self.payload(event='late-test-event-000001')
+        later.update(learningSessionId='later-session-000001', answeredAt=20000)
+        self.request('/api/attempts', 'POST', later)
+        earlier = self.payload(event='early-practice-event-01')
+        earlier.update(learningSessionId='early-session-000001', answeredAt=10000)
+        earlier['answers'][0]['selected'] = next(k for k in self.question['options'] if k != self.question['answer'])
+        data = self.request('/api/attempts', 'POST', earlier)[1]
+        self.assertEqual(data['progress']['mastery'][str(self.question['id'])], 1)
+
+    def test_mastery_metadata_validation(self):
+        self.register()
+        for invalid in [{'learningSessionId': 'bad'}, {'answeredAt': -1}, {'answeredAt': 'yesterday'}]:
+            body = self.payload()
+            body.update(invalid)
+            self.assertEqual(self.request('/api/attempts', 'POST', body)[0], 400)
+
 
 if __name__ == '__main__':
     unittest.main()

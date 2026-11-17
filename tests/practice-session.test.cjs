@@ -12,7 +12,7 @@ function app(t,entries={},indexedDB=new IDBFactory()){
   w.katex=require('katex');Object.defineProperty(w,'indexedDB',{value:indexedDB});
   for(const [key,value] of Object.entries(entries))w.localStorage.setItem(key,value);
   w.fetch=async()=>({ok:false,status:401,headers:{get:()=> 'application/json'},json:async()=>({error:'offline test session'})});
-  for(const file of ['math-format.js','question-revisions.js','practice-sync.js','account.js'])run(fs.readFileSync(file,'utf8'));
+  for(const file of ['learning.js','math-format.js','question-revisions.js','practice-sync.js','account.js'])run(fs.readFileSync(file,'utf8'));
   run(html.match(/<script>([\s\S]*?)<\/script>/)[1].replace('initializeAccount();',''));
   const close=()=>{run('practiceSync.stop()');dom.window.close();};t.after(close);
   const storage=()=>Object.fromEntries(Array.from({length:w.localStorage.length},(_,i)=>{const key=w.localStorage.key(i);return [key,w.localStorage.getItem(key)];}));
@@ -94,4 +94,42 @@ test('invalid saved data falls back safely and saved positions never jump out of
   const a=app(t,{'dpl302-practice-session-v1':'broken json'});assert.equal(a.run('practice.index'),0);
   const b=app(t,{'dpl302-practice-session-v1':JSON.stringify({version:1,filter:'missing section',questionId:99999,index:99999,responses:{bad:{selected:'X'}}})});
   assert.equal(b.run('practice.filter'),'all');assert.equal(b.run('practice.index'),251);assert.equal(b.run('practice.checked'),false);
+});
+
+test('mastery tags reflect promotion, same-session retry protection, minus-two penalties and new practice sessions',async t=>{
+  const a=app(t);a.run("progress.mastery={1:2};navTo('practice')");
+  assert.equal(a.w.document.querySelector('[data-mastery-question="1"]').textContent,'Nhớ');
+  const original=a.run('practice.learningSessionId');
+  await a.run("selectPractice('B')");assert.equal(a.run('progress.mastery[1]'),3);
+  a.run('retryPracticeQuestion()');await a.run("selectPractice('B')");assert.equal(a.run('progress.mastery[1]'),3);
+  a.run('retryPracticeQuestion()');await a.run("selectPractice('A')");assert.equal(a.run('progress.mastery[1]'),1);
+  a.run('retryPracticeQuestion()');await a.run("selectPractice('B')");assert.equal(a.run('progress.mastery[1]'),1);
+  const saved=a.storage();const b=app(t,saved);assert.equal(b.run('practice.learningSessionId'),original);assert.equal(b.run('practice.masterySeen[1]'),true);
+  a.run('resetPractice()');assert.notEqual(a.run('practice.learningSessionId'),original);
+  await a.run("selectPractice('B')");assert.equal(a.run('progress.mastery[1]'),2);
+  assert.equal(a.w.document.querySelector('[data-mastery-question="1"]').textContent,'Nhớ');
+});
+
+test('ratio setup auto-balances, previews actual counts and scores blanks only when an exam is submitted',async t=>{
+  const a=app(t);a.run("navTo('test')");
+  const first=a.w.document.querySelector('[data-topic-ratio="0"]');first.value='40';first.dispatchEvent(new a.w.Event('change'));
+  assert.deepEqual(Array.from(a.w.document.querySelectorAll('[data-topic-ratio]'),input=>Number(input.value)),[40,20,20,20]);
+  a.w.document.querySelector('#testSize').value='10';a.w.document.querySelector('#testSize').dispatchEvent(new a.w.Event('change'));
+  a.w.document.querySelector('#startTest').click();
+  assert.deepEqual(JSON.parse(a.run('JSON.stringify(Learning.topics.map(s=>test.pool.filter(q=>q.section===s).length))')),[4,2,2,2]);
+  a.run('progress.mastery=Object.fromEntries(test.pool.map(q=>[q.id,3]));test.answers[test.pool[0].id]=test.pool[0].answer;');
+  await a.run('submitTest()');
+  assert.equal(a.run('progress.mastery[test.pool[0].id]'),3);assert.equal(a.run('progress.mastery[test.pool[1].id]'),1);
+  assert.equal(a.run('progress.questionAttempts[test.pool[1].id]'),undefined);
+});
+
+test('ratio preferences are account-scoped and whole-bank or shortage previews communicate constraints',async t=>{
+  const a=app(t);await a.login(1);a.run("navTo('test')");
+  const first=a.w.document.querySelector('[data-topic-ratio="0"]');first.value='40';first.dispatchEvent(new a.w.Event('change'));
+  await a.login(2);a.run("navTo('test')");assert.equal(a.w.document.querySelector('[data-topic-ratio="0"]').value,'25');
+  await a.login(1);a.run("navTo('test')");assert.equal(a.w.document.querySelector('[data-topic-ratio="0"]').value,'40');
+  a.w.document.querySelector('#testSize').value='all';a.w.document.querySelector('#testSize').dispatchEvent(new a.w.Event('change'));
+  assert.equal(a.w.document.querySelector('[data-topic-ratio="0"]').disabled,true);assert.match(a.w.document.querySelector('#examPreview').textContent,/tỷ lệ thực tế/);
+  a.run("questions=Learning.topics.map((section,id)=>({id,section}));writeJSON(personalKey(STORAGE.exam),{filter:'all',size:'50',ratios:[25,25,25,25]});renderView()");
+  assert.equal(a.w.document.querySelector('#startTest').disabled,true);assert.match(a.w.document.querySelector('#examPreview').textContent,/cần/);
 });

@@ -70,7 +70,7 @@ test('vendored renderer and every locally referenced font are available without 
 function app(){
   const dom=new JSDOM(html,{runScripts:'outside-only',url:'https://study.test/'}),w=dom.window;
   w.katex=katex;const run=code=>vm.runInContext(code,dom.getInternalVMContext());
-  for(const file of ['math-format.js','question-revisions.js','practice-sync.js','account.js'])run(fs.readFileSync(file,'utf8'));
+  for(const file of ['learning.js','math-format.js','question-revisions.js','practice-sync.js','account.js'])run(fs.readFileSync(file,'utf8'));
   run(html.match(/<script>([\s\S]*?)<\/script>/)[1].replace('initializeAccount();',''));
   return {dom,w,run};
 }

@@ -19,6 +19,7 @@ const practiceSync = new PracticeSync.PracticeSync({
     if(!account||account.id!==state.userId)return;
     const wasPending=syncState?.pending;
     syncState=state;progress=state.progress;renderSyncStatus();
+    updateMasteryTags();
     if(currentView==='practice')updatePracticeAttemptCount();
     if(currentView==='dashboard'&&!accountBusy)renderView();
     if(currentView==='history'&&wasPending&&!state.pending&&!historyDetailId)loadHistory();
@@ -159,10 +160,10 @@ function openAccount(forceLogin=false){
   };
   $('#username').focus();
 }
-async function saveAttempt(mode, pool, answers, eventId){
+async function saveAttempt(mode, pool, answers, eventId, metadata={}){
   const epoch=accountEpoch;
   const payload={
-    mode,eventId,answers:pool.map(q=>({question:q,selected:answers[q.id]||null}))
+    mode,eventId,...metadata,answers:pool.map(q=>({question:q,selected:answers[q.id]||null}))
   };
   const result=await api('attempts','POST',payload);
   if(epoch!==accountEpoch)throw new Error('Tài khoản đã thay đổi.');

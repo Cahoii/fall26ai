@@ -13,6 +13,7 @@ import threading
 import time
 from urllib.parse import parse_qs, urlsplit
 from database import connection, DATABASE_ERRORS, INTEGRITY_ERRORS, DatabaseConfigurationError
+from learning import mastery_from_history
 
 ROOT = Path(__file__).resolve().parent
 DB_PATH = Path(os.environ.get("DPL302_DB", ROOT / "data" / "study.sqlite3"))
@@ -69,6 +70,11 @@ def init_db():
             schema = schema.replace('UNIQUE COLLATE NOCASE', '')
             schema += 'CREATE UNIQUE INDEX IF NOT EXISTS users_username_lower ON users(lower(username));'
         db.executescript(schema)
+        # Nullable columns distinguish the old history from modern learning sessions.
+        columns = {r[0] for r in db.execute('SELECT column_name FROM information_schema.columns WHERE table_schema=? AND table_name=?', ('dpl302', 'attempts'))} if DATABASE_URL else {r[1] for r in db.execute('PRAGMA table_info(attempts)')}
+        for name, kind in [('learning_session_id', 'TEXT'), ('answered_at_ms', 'BIGINT')]:
+            if name not in columns:
+                db.execute(f'ALTER TABLE attempts ADD COLUMN {name} {kind}')
 
 
 def ensure_database():
@@ -88,12 +94,19 @@ def progress(db, user_id):
     question_counts = db.execute("""SELECT a.question_id, COUNT(*) FROM answers a
         JOIN attempts t ON t.id=a.attempt_id WHERE t.user_id=? AND a.selected_answer IS NOT NULL
         GROUP BY a.question_id""", (user_id,)).fetchall()
+    mastery_rows = db.execute('''SELECT a.id,a.question_id,a.is_correct,t.event_id,t.learning_session_id,t.answered_at_ms
+        FROM answers a JOIN attempts t ON t.id=a.attempt_id WHERE t.user_id=?''', (user_id,)).fetchall()
     return {"known": [r[0] for r in db.execute("SELECT question_id FROM known_questions WHERE user_id=?", (user_id,))],
             "attempts": counts[0], "correct": counts[1], "wrong": [r[0] for r in wrong],
-            "questionAttempts": {str(r[0]): r[1] for r in question_counts}}
+            "questionAttempts": {str(r[0]): r[1] for r in question_counts}, "mastery": mastery_from_history(mastery_rows)}
 
 
 def validate_answers(body):
+    session = body.get('learningSessionId')
+    if session is not None and (not isinstance(session, str) or not re.fullmatch(r'[\w-]{16,100}', session)):
+        raise ValueError('Mã lượt học không hợp lệ.')
+    if 'answeredAt' in body and (type(body['answeredAt']) is not int or body['answeredAt'] <= 0):
+        raise ValueError('Thời điểm trả lời không hợp lệ.')
     if body.get("mode") not in ("practice", "test"):
         raise ValueError("Chế độ không hợp lệ.")
     if not isinstance(body.get("eventId"), str) or not re.fullmatch(r"[\w-]{16,100}", body["eventId"]):
@@ -172,6 +185,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self.reply(405, {"error": "Phương thức không được hỗ trợ."})
             # Explicit public files only: never expose database, source or backups.
             name = {"/": "index.html", "/index.html": "index.html", "/account.js": "account.js",
+                    "/learning.js": "learning.js",
                     "/practice-sync.js": "practice-sync.js",
                     "/math-format.js": "math-format.js", "/question-revisions.js": "question-revisions.js",
                     "/questions.json": "questions.json", "/questions.csv": "questions.csv"}.get(url.path)
@@ -253,7 +267,11 @@ class Handler(BaseHTTPRequestHandler):
                     body = self.body()
                     rows = validate_answers(body)
                     correct = sum(row.get("selected") == row["question"]["answer"] for row in rows)
-                    cursor = db.execute("INSERT OR IGNORE INTO attempts(user_id,event_id,mode,created_at,total,correct) VALUES(?,?,?,?,?,?)", (uid, body["eventId"], body["mode"], int(time.time()), len(rows), correct))
+                    now_ms = int(time.time() * 1000)
+                    performed = body.get('answeredAt', now_ms)
+                    if performed > now_ms + 300000:
+                        performed = now_ms
+                    cursor = db.execute("INSERT OR IGNORE INTO attempts(user_id,event_id,mode,created_at,total,correct,learning_session_id,answered_at_ms) VALUES(?,?,?,?,?,?,?,?)", (uid, body["eventId"], body["mode"], int(time.time()), len(rows), correct, body.get('learningSessionId'), performed))
                     if cursor.rowcount:
                         for pos, row in enumerate(rows):
                             q = row["question"]

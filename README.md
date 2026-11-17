@@ -128,6 +128,34 @@ CÔNG THỨC TOÁN
 - Lượt chưa đồng bộ chỉ tồn tại trên thiết bị hiện tại. Xóa dữ liệu trình duyệt
   sẽ xóa các lượt chưa gửi; lịch sử đã lên Neon vẫn được giữ.
 
+THÀNH THỤC VÀ ĐỀ THEO CHỦ ĐỀ
+---------------------------
+- Mỗi câu có 4 mức: 0 Chưa thuộc (đỏ nhạt), 1 Thuộc (vàng), 2 Nhớ (xanh lá),
+  3 Nắm rõ (xanh nước biển). Tag hiển thị trên flashcards, luyện tập, bài kiểm
+  tra, kết quả và ngân hàng câu hỏi; đánh dấu flashcard thủ công giữ riêng.
+- Đúng ở lần trả lời đầu của câu trong một lượt học: +1 bậc, tối đa 3. Sai hoặc
+  bỏ trống bài kiểm tra: -2 bậc, tối thiểu 0. Lần đầu sai vẫn tiêu thụ quyền
+  tăng bậc của câu trong lượt đó; xem lại/làm lại đúng ngay không tăng thêm.
+- Mã learningSessionId của lượt luyện được giữ qua đóng tab, đổi chủ đề và
+  đăng nhập lại. “Luyện lại từ đầu” tạo mã mới; mỗi bài kiểm tra có mã riêng.
+- Lịch sử cũ: từng đúng ít nhất một lần thì khởi tạo mức 1, còn lại mức 0.
+  Chế độ khách bắt đầu ở mức 0 vì không có lịch sử cũ đầy đủ để tính lại.
+- API tiến độ thêm `mastery` dạng `{ "66": 2 }`. Lượt làm mới gửi thêm
+  `learningSessionId` và `answeredAt` (Unix milliseconds); server tự kiểm tra
+  lần đầu theo tài khoản/câu/session, không dùng cờ tăng bậc của client.
+- Migration thêm hai cột nullable vào attempts, không sửa/xóa lượt cũ. Server
+  tính lại mức theo thời điểm thực hiện, kể cả lượt offline được gửi muộn;
+  hàng đợi client giữ timeline tạm cho tới khi server xác nhận hết backlog.
+- Đề trộn mặc định 25/25/25/25. Mỗi tỷ lệ nguyên trong 20–40%, tổng luôn 100%;
+  đổi một chủ đề sẽ cân chỉnh phần vượt 20% của ba chủ đề còn lại. Phần lẻ
+  phân bổ số câu theo phần dư lớn nhất, hòa theo thứ tự chủ đề trên giao diện.
+- Trong từng chủ đề, chọn ngẫu nhiên không lặp với trọng số 8/4/2/1 từ mức thấp
+  tới cao. Checkbox trộn chỉ đổi thứ tự trình bày; không tắt ưu tiên câu yếu.
+- Hiển thị số câu thực tế trước khi bắt đầu. Nếu thiếu câu cho tỷ lệ đã chọn,
+  chặn tạo đề và báo rõ chủ đề đang thiếu. Chế độ một chủ đề được giữ lại;
+  “Toàn bộ” lấy tất cả câu một lần, tắt điều chỉnh tỷ lệ và ghi tỷ lệ thực tế.
+- Cấu hình tỷ lệ được lưu trên trình duyệt, riêng từng tài khoản.
+
 TÍNH NĂNG
 ---------
 - Flashcards: xem câu hỏi, lật thẻ để xem đáp án, đánh dấu đã thuộc/cần ôn lại.

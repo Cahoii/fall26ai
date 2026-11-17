@@ -14,6 +14,7 @@ async function setup(indexedDB=new IDBFactory()){
   w.katex=require('katex');
   w.eval(fs.readFileSync('math-format.js','utf8'));
   w.eval(fs.readFileSync('question-revisions.js','utf8'));
+  w.eval(fs.readFileSync('learning.js','utf8'));
   w.eval(fs.readFileSync('practice-sync.js','utf8'));
   w.eval(fs.readFileSync('account.js','utf8'));
   w.eval(html.match(/<script>([\s\S]*?)<\/script>/)[1].replace('initializeAccount();',''));
