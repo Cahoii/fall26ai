@@ -88,6 +88,9 @@ CÔNG THỨC TOÁN
   ngân hàng câu hỏi và lịch sử hiển thị ký hiệu toán học.
 - Các câu 66, 102, 113, 115, 128 được đối chiếu lại với ảnh gốc; xem bản duyệt
   tại `reviews/math-corrections.md`. Ảnh 4 và ảnh 6 là cùng câu 115.
+- Các câu 203, 209, 210, 211, 229, 231, 237, 248 được sửa tiếp theo ảnh gốc
+  ngày 17/11/2026; xem `reviews/math-corrections-2026-11-17.md`. Đã khôi phục
+  chuyển vị/nhân từng phần tử, chỉ số lớp bị thiếu và các ký hiệu α, λ, μ, σ, β.
 - Bộ câu hỏi cũ trên trình duyệt được sửa có chọn lọc theo nội dung gốc; giữ
   nội dung tự chỉnh sửa và giữ nguyên bản chụp của lịch sử đã lưu trên database.
 - Khi nâng phiên bản KaTeX, cập nhật dependency rồi chạy `npm run vendor:math`

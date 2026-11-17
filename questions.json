@@ -3002,16 +3002,16 @@
   {
     "id": 203,
     "section": "Sequence Models & Neural Network Fundamentals",
-    "question": "In a 2-layer network, how is dZ^(1) computed?",
+    "question": "In a 2-layer network, how is \\(\\mathrm{d}Z^{(1)}\\) computed?",
     "options": {
-      "A": "dZ^(1) = A^(1) − Y",
-      "B": "dZ^(1) = (W^(2).T @ dZ^(2)) element-wise multiplied by g′^(1)(Z^(1))",
-      "C": "dZ^(1) = W^(1) @ X",
-      "D": "dZ^(1) = np.sum(dZ^(2))"
+      "A": "\\(\\mathrm{d}Z^{(1)}=A^{(1)}-Y\\)",
+      "B": "\\(\\mathrm{d}Z^{(1)}=\\left((W^{(2)})^{\\mathsf{T}}\\mathrm{d}Z^{(2)}\\right)\\odot g^{(1)\\prime}\\!\\left(Z^{(1)}\\right)\\)",
+      "C": "\\(\\mathrm{d}Z^{(1)}=W^{(1)}X\\)",
+      "D": "\\(\\mathrm{d}Z^{(1)}=\\operatorname{np.sum}\\!\\left(\\mathrm{d}Z^{(2)}\\right)\\)"
     },
     "answer": "B",
     "sourceImage": "Ảnh chụp màn hình 2026-11-08 002007.png",
-    "correctText": "dZ^(1) = (W^(2).T @ dZ^(2)) element-wise multiplied by g′^(1)(Z^(1))",
+    "correctText": "\\(\\mathrm{d}Z^{(1)}=\\left((W^{(2)})^{\\mathsf{T}}\\mathrm{d}Z^{(2)}\\right)\\odot g^{(1)\\prime}\\!\\left(Z^{(1)}\\right)\\)",
     "answerSource": "answers.csv — đối chiếu theo tên ảnh"
   },
   {
@@ -3092,46 +3092,46 @@
   {
     "id": 209,
     "section": "Sequence Models & Neural Network Fundamentals",
-    "question": "What is the shape of W^(l)?",
+    "question": "What is the shape of \\(W^{(l)}\\)?",
     "options": {
-      "A": "(n^(l), n^(l−1))",
-      "B": "(n^(l−1), n^(l))",
-      "C": "(n^(l), 1)",
-      "D": "(n^(l), m)"
+      "A": "\\(\\left(n^{(l)},\\,n^{(l-1)}\\right)\\)",
+      "B": "\\(\\left(n^{(l-1)},\\,n^{(l)}\\right)\\)",
+      "C": "\\(\\left(n^{(l)},\\,1\\right)\\)",
+      "D": "\\(\\left(n^{(l)},\\,m\\right)\\)"
     },
     "answer": "A",
     "sourceImage": "Ảnh chụp màn hình 2026-11-08 002430.png",
-    "correctText": "(n^(l), n^(l−1))",
+    "correctText": "\\(\\left(n^{(l)},\\,n^{(l-1)}\\right)\\)",
     "answerSource": "answers.csv — đối chiếu theo tên ảnh"
   },
   {
     "id": 210,
     "section": "Sequence Models & Neural Network Fundamentals",
-    "question": "What is the shape of b^(l)?",
+    "question": "What is the shape of \\(b^{(l)}\\)?",
     "options": {
-      "A": "(1, n^(l))",
-      "B": "(n, 1)",
-      "C": "(n^(l), m)",
-      "D": "(n^(l), 1)"
+      "A": "\\(\\left(1,\\,n^{(l)}\\right)\\)",
+      "B": "\\(\\left(n^{(l-1)},\\,1\\right)\\)",
+      "C": "\\(\\left(n^{(l)},\\,m\\right)\\)",
+      "D": "\\(\\left(n^{(l)},\\,1\\right)\\)"
     },
     "answer": "D",
     "sourceImage": "Ảnh chụp màn hình 2026-11-08 002434.png",
-    "correctText": "(n^(l), 1)",
+    "correctText": "\\(\\left(n^{(l)},\\,1\\right)\\)",
     "answerSource": "answers.csv — đối chiếu theo tên ảnh"
   },
   {
     "id": 211,
     "section": "Sequence Models & Neural Network Fundamentals",
-    "question": "In the example with n^(0) = 2 and n^(1) = 3, what is the shape of W^(1)?",
+    "question": "In the example with \\(n^{(0)}=2\\) and \\(n^{(1)}=3\\), what is the shape of \\(W^{(1)}\\)?",
     "options": {
-      "A": "(2, 3)",
-      "B": "(3, 2)",
-      "C": "(3, 1)",
-      "D": "(2, 1)"
+      "A": "\\((2,\\,3)\\)",
+      "B": "\\((3,\\,2)\\)",
+      "C": "\\((3,\\,1)\\)",
+      "D": "\\((2,\\,1)\\)"
     },
     "answer": "B",
     "sourceImage": "Ảnh chụp màn hình 2026-11-08 002439.png",
-    "correctText": "(3, 2)",
+    "correctText": "\\((3,\\,2)\\)",
     "answerSource": "answers.csv — đối chiếu theo tên ảnh"
   },
   {
@@ -3377,16 +3377,16 @@
   {
     "id": 229,
     "section": "Improving Deep Neural Networks & ML Strategy",
-    "question": "Why is L2 regularization also called \"weight decay\"?",
+    "question": "Why is \\(L_2\\) regularization also called \"weight decay\"?",
     "options": {
       "A": "Weights are deleted after each epoch",
       "B": "The learning rate decays over time",
-      "C": "Each update multiplies W by (1 - aA/m), shrinking it",
+      "C": "Each update multiplies \\(W\\) by \\(\\left(1-\\frac{\\alpha\\lambda}{m}\\right)\\), shrinking it",
       "D": "Weights decay to exactly zero"
     },
     "answer": "C",
     "sourceImage": "Ảnh chụp màn hình 2026-11-08 002548.png",
-    "correctText": "Each update multiplies W by (1 - aA/m), shrinking it",
+    "correctText": "Each update multiplies \\(W\\) by \\(\\left(1-\\frac{\\alpha\\lambda}{m}\\right)\\), shrinking it",
     "answerSource": "answers.csv — đối chiếu theo tên ảnh"
   },
   {
@@ -3407,7 +3407,7 @@
   {
     "id": 231,
     "section": "Improving Deep Neural Networks & ML Strategy",
-    "question": "How is the regularization parameter A usually chosen?",
+    "question": "How is the regularization parameter \\(\\lambda\\) usually chosen?",
     "options": {
       "A": "Using the dev set",
       "B": "Using the test set",
@@ -3499,14 +3499,14 @@
     "section": "Improving Deep Neural Networks & ML Strategy",
     "question": "How should the test set be normalized?",
     "options": {
-      "A": "With the same py and o computed on the training set",
-      "B": "With its own p and o",
+      "A": "With the same \\(\\mu\\) and \\(\\sigma\\) computed on the training set",
+      "B": "With its own \\(\\mu\\) and \\(\\sigma\\)",
       "C": "It should not be normalized",
-      "D": "With p = 0 and o = 1 for every feature by definition"
+      "D": "With \\(\\mu=0\\) and \\(\\sigma=1\\) for every feature by definition"
     },
     "answer": "A",
     "sourceImage": "Ảnh chụp màn hình 2026-11-08 003754.png",
-    "correctText": "With the same py and o computed on the training set",
+    "correctText": "With the same \\(\\mu\\) and \\(\\sigma\\) computed on the training set",
     "answerSource": "answers.csv — đối chiếu theo tên ảnh"
   },
   {
@@ -3662,7 +3662,7 @@
   {
     "id": 248,
     "section": "Improving Deep Neural Networks & ML Strategy",
-    "question": "With B = 0.9, an exponentially weighted average roughly averages over how many recent values?",
+    "question": "With \\(\\beta=0.9\\), an exponentially weighted average roughly averages over how many recent values?",
     "options": {
       "A": "About 10",
       "B": "About 2",
