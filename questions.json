@@ -2554,14 +2554,14 @@
     "section": "Sequence Models & Neural Network Fundamentals",
     "question": "Which is the logistic regression loss for one example?",
     "options": {
-      "A": "-(y log y + (1 - y) log(1 - y))",
-      "B": "(y-y//2",
-      "C": "max(0, 1 - yy)",
-      "D": "log(y) + log(y)"
+      "A": "\\(-\\left(y\\log\\hat{y}+(1-y)\\log(1-\\hat{y})\\right)\\)",
+      "B": "\\(\\frac{(\\hat{y}-y)^2}{2}\\)",
+      "C": "\\(\\max(0,\\,1-y\\hat{y})\\)",
+      "D": "\\(\\log(y)+\\log(\\hat{y})\\)"
     },
     "answer": "A",
     "sourceImage": "Ảnh chụp màn hình 2026-11-08 001758.png",
-    "correctText": "-(y log y + (1 - y) log(1 - y))",
+    "correctText": "\\(-\\left(y\\log\\hat{y}+(1-y)\\log(1-\\hat{y})\\right)\\)",
     "answerSource": "answers.csv — đối chiếu theo tên ảnh"
   },
   {

@@ -16,7 +16,7 @@ test('all corrected questions have valid LaTeX, preserve source answers, and agr
   assert.deepEqual(embedded,questions);
   assert.deepEqual(revisions.map(r=>[r.after.id,r.after.answer]),[
     [66,'B'],[102,'A'],[113,'C'],[115,'D'],[128,'D'],
-    [203,'B'],[209,'A'],[210,'D'],[211,'B'],[229,'C'],[231,'A'],[237,'A'],[248,'A']
+    [203,'B'],[209,'A'],[210,'D'],[211,'B'],[229,'C'],[231,'A'],[237,'A'],[248,'A'],[173,'A']
   ]);
   for(const {after} of revisions){
     const q=questions.find(q=>q.id===after.id);assert.deepEqual(q,after);
@@ -38,7 +38,7 @@ test('November 17 source corrections restore transpose, Hadamard product, layer 
   assert.match(q(229).options.C,/\\frac\{\\alpha\\lambda\}\{m\}/);
   assert.match(q(231).question,/\\lambda/);assert.match(q(248).question,/\\beta=0\.9/);
   for(const key of ['A','B','D']){assert.match(q(237).options[key],/\\mu/);assert.match(q(237).options[key],/\\sigma/);}
-  assert.equal(revisions.length,13);
+  assert.equal(revisions.length,14);
 });
 
 test('renderer escapes prose and refuses executable links/HTML while keeping MathML',()=>{
@@ -76,7 +76,7 @@ function app(){
 }
 test('actual flashcards, practice, tests, results, library and editor handle the corrected notation',t=>{
   const {dom,w,run}=app();t.after(()=>dom.window.close());
-  for(const id of [66,102,113,115,128,203,209,210,211,229,231,237,248]){
+  for(const id of [66,102,113,115,128,173,203,209,210,211,229,231,237,248]){
     run(`questions=[DEFAULT_QUESTIONS.find(q=>q.id===${id})];study.pool=[];practice.pool=[];`);
     for(const view of ['study','practice','test','library']){
       if(view==='test')run("test={active:true,pool:questions,index:0,answers:{},submitted:false};");

@@ -6,6 +6,37 @@ const {JSDOM}=require('jsdom');
 const {IDBFactory}=require('fake-indexeddb');
 const html=fs.readFileSync('index.html','utf8');
 const empty=()=>({known:[],wrong:[],attempts:0,correct:0,questionAttempts:{}});
+
+test('retry wrong exam includes blanks, clears answers, creates a new session and updates mastery only on submission',async t=>{
+  const a=app(t);
+  a.run(`test={active:true,pool:questions.slice(0,3),index:0,answers:{},submitted:false,
+    eventId:newEventId(),learningSessionId:newEventId()};
+    test.answers[test.pool[0].id]=test.pool[0].answer;
+    test.answers[test.pool[1].id]=Object.keys(test.pool[1].options).find(k=>k!==test.pool[1].answer);
+    navTo('test');`);
+  await a.run('submitTest()');
+  const oldEvent=a.run('test.eventId'),oldSession=a.run('test.learningSessionId');
+  assert.match(a.w.document.querySelector('#testRetryWrong').textContent,/\(2\)/);
+  a.w.document.querySelector('#testRetryWrong').click();
+  assert.deepEqual(JSON.parse(a.run('JSON.stringify(test.pool.map(q=>q.id))')),[2,3]);
+  assert.equal(a.run('Object.keys(test.answers).length'),0);
+  assert.equal(a.run('test.index'),0);assert.equal(a.run('test.submitted'),false);
+  assert.notEqual(a.run('test.eventId'),oldEvent);assert.notEqual(a.run('test.learningSessionId'),oldSession);
+  assert.equal(a.run('test.answeredAt'),null);assert.equal(a.run('progress.attempts'),3);
+  assert.match(a.w.document.querySelector('.page-title').textContent,/Làm lại câu sai/);
+  assert.equal(a.w.document.querySelector('.feedback'),null);
+  a.run('test.answers[test.pool[0].id]=test.pool[0].answer');
+  await a.run('submitTest()');
+  assert.equal(a.run('progress.attempts'),5);assert.equal(a.run('progress.mastery[2]'),1);
+  assert.equal(a.run('progress.mastery[3]'),0);
+  a.w.document.querySelector('#testRetryWrong').click();
+  assert.deepEqual(JSON.parse(a.run('JSON.stringify(test.pool.map(q=>q.id))')),[3]);
+  a.run('test.answers[test.pool[0].id]=test.pool[0].answer');await a.run('submitTest()');
+  assert.equal(a.w.document.querySelector('#testRetryWrong'),null);
+  assert.ok(a.w.document.querySelector('#testAgain'));
+  assert.equal(a.run('progress.mastery[3]'),1);assert.equal(a.run('progress.attempts'),6);
+});
+
 function app(t,entries={},indexedDB=new IDBFactory()){
   const dom=new JSDOM(html,{runScripts:'outside-only',url:'https://study.test/'}),w=dom.window;
   const run=code=>vm.runInContext(code,dom.getInternalVMContext());
